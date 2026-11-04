@@ -22,7 +22,10 @@ export function Hero() {
               <span className="text-emerald-900 font-serif italic font-normal">to Your Table</span>
             </h1>
 
-            <p className="urdu-font text-base sm:text-xl md:text-2xl text-emerald-900 font-bold pt-1 whitespace-nowrap overflow-x-auto scrollbar-none">
+            <p 
+              style={{ whiteSpace: 'nowrap' }} 
+              className="urdu-font text-xs sm:text-lg md:text-xl text-emerald-900 font-bold pt-1 overflow-x-auto scrollbar-none block"
+            >
               خالص دودھ، تازہ دہی اور روایتی دیسی گھی حلوہ جات
             </p>
           </div>

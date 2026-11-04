@@ -21,7 +21,10 @@ export function BranchAnnouncement() {
                 Grand Opening in Sahiwal!
               </div>
 
-              <h3 className="urdu-font text-base sm:text-2xl md:text-3xl font-black text-emerald-950 leading-relaxed whitespace-nowrap overflow-x-auto scrollbar-none">
+              <h3 
+                style={{ whiteSpace: 'nowrap' }} 
+                className="urdu-font text-xs sm:text-lg md:text-2xl font-black text-emerald-950 leading-relaxed overflow-x-auto scrollbar-none block"
+              >
                 مبارک ہو ساہیوال! حاجی راج دین ڈیری کی تیسری برانچ کا شاندار افتتاح
               </h3>
 

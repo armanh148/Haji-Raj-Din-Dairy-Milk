@@ -64,12 +64,15 @@ export function OrderCalculator() {
       <div className="container">
         
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12">
+        <div className="text-center w-full max-w-5xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-300 mb-3 shadow-2xs">
             <Calculator size={14} className="text-emerald-700" />
             Fast WhatsApp Order Assistant
           </div>
-          <h2 className="urdu-font text-lg sm:text-2xl md:text-3xl lg:text-4xl font-black text-emerald-950 mb-2 leading-relaxed whitespace-nowrap overflow-x-auto scrollbar-none py-1">
+          <h2 
+            style={{ whiteSpace: 'nowrap' }} 
+            className="urdu-font text-sm sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-x-auto scrollbar-none py-1 block w-full text-center"
+          >
             آن لائن واٹس ایپ آرڈر اور بل کیلکولیٹر
           </h2>
           <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
