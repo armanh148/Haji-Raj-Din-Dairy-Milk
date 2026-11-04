@@ -23,7 +23,7 @@ export function BranchAnnouncement() {
 
               <h3 
                 style={{ whiteSpace: 'nowrap' }} 
-                className="urdu-font text-xs sm:text-lg md:text-2xl font-black text-emerald-950 leading-relaxed overflow-x-auto scrollbar-none block"
+                className="urdu-font text-base sm:text-xl md:text-2xl font-black text-emerald-950 leading-relaxed overflow-visible py-2 block"
               >
                 مبارک ہو ساہیوال! حاجی راج دین ڈیری کی تیسری برانچ کا شاندار افتتاح
               </h3>

@@ -24,7 +24,7 @@ export function Hero() {
 
             <p 
               style={{ whiteSpace: 'nowrap' }} 
-              className="urdu-font text-xs sm:text-lg md:text-xl text-emerald-900 font-bold pt-1 overflow-x-auto scrollbar-none block"
+              className="urdu-font text-base sm:text-lg md:text-xl text-emerald-900 font-bold pt-1 overflow-visible py-1 block"
             >
               خالص دودھ، تازہ دہی اور روایتی دیسی گھی حلوہ جات
             </p>

@@ -50,7 +50,7 @@ export function PosPitchSection() {
           </div>
           <h2 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-[13px] sm:text-lg md:text-xl lg:text-2xl font-black text-amber-300 mb-2 leading-relaxed overflow-x-auto scrollbar-none py-1 block w-full text-center"
+            className="urdu-font text-xs sm:text-base md:text-xl lg:text-2xl font-black text-amber-300 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
           >
             ملٹی برانچ ویب سائٹ اور ڈیسک ٹاپ سٹاک ایکسپائری پی او ایس سسٹم
           </h2>

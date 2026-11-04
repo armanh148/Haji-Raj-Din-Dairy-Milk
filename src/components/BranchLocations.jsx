@@ -19,7 +19,7 @@ export function BranchLocations() {
           </div>
           <h2 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-sm sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-x-auto scrollbar-none py-1 block w-full text-center"
+            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
           >
             ساہیوال میں ہماری ۳ برانچز پر تشریف لائیں
           </h2>

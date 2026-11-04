@@ -71,7 +71,7 @@ export function OrderCalculator() {
           </div>
           <h2 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-sm sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-x-auto scrollbar-none py-1 block w-full text-center"
+            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
           >
             آن لائن واٹس ایپ آرڈر اور بل کیلکولیٹر
           </h2>

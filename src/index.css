@@ -23,7 +23,9 @@
 
 .urdu-font {
   font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Amiri', serif;
-  line-height: 2.1;
+  line-height: 2.5;
+  overflow: visible !important;
+  display: inline-block;
 }
 
 /* Custom full-width fluid responsive container matching Agrovia layout */
