@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { products } from '../data/dairyData';
-import { ShoppingBag, Check, Plus, Sparkles, Filter } from 'lucide-react';
+import { Check, Plus, Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
 
 const categories = [
   { id: 'all', name: 'All Specialties', urdu: 'تمام مصنوعات' },
@@ -28,115 +28,118 @@ export function ProductCatalog({ onAddToCart }) {
   };
 
   return (
-    <section id="products" className="py-16 bg-slate-50">
+    <section id="products" className="py-16 sm:py-20 bg-[#faf8f2] relative">
       <div className="container">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">
-            <Sparkles size={14} className="text-emerald-600" />
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100/80 text-emerald-900 border border-emerald-300/60 mb-3 shadow-2xs">
+            <Sparkles size={13} className="text-emerald-700" />
             100% Pure Sahiwal Dairy Tradition
           </div>
-          <h2 className="urdu-font text-3xl sm:text-4xl font-black text-emerald-950 mb-2">
+          <h2 className="urdu-font text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-950 mb-2 leading-relaxed">
             خالص دودھ، تازہ دہی اور لذیذ دیسی گھی سوغاتیں
           </h2>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Our Pure Dairy Products & Sweet Specialties
+          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Artisanal Dairy Products & Royal Confectionery
           </h3>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Delivering daily from our farm to our 3 Sahiwal branches: Ghori St, Gujar Ahata & Madhali Road. 
-            All products are 100% natural, hygienic, and free from artificial thickeners or chemicals.
+          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
+            Directly from our farm chillers to our 3 Sahiwal branches: <strong>Madhali Rd</strong>, <strong>Ghori St</strong> & <strong>Gujar Ahata</strong>. 
+            Prepared daily without chemical thickeners or synthetic fats.
           </p>
         </div>
 
-        {/* Categories Bar - Responsive Horizontal Touch Scroll */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-6 sm:mb-8 -mx-2 px-2 sm:mx-0 sm:px-0">
+        {/* Categories Bar - Responsive Horizontal Touch Scroll with Luxury Pills */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-8 -mx-2 px-2 sm:mx-0 sm:px-0 scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 ${
+              className={`px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 shadow-2xs ${
                 activeCategory === cat.id
-                  ? 'bg-emerald-800 text-white shadow-md'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-gradient-to-r from-[#063821] to-[#042414] text-amber-300 border border-amber-500/50 shadow-md shadow-emerald-950/20'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'
               }`}
             >
               <span>{cat.name}</span>
-              <span className="text-xs opacity-80 urdu-font hidden md:inline">({cat.urdu})</span>
+              <span className="text-xs opacity-75 urdu-font hidden md:inline">({cat.urdu})</span>
             </button>
           ))}
         </div>
 
-        {/* Product Cards Grid - 2 Per Row on Mobile, Responsive across all devices */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2.5 sm:gap-4 md:gap-6">
+        {/* Product Cards Grid - 2 Per Row on Mobile, Responsive Multi-Column on Wider Screens */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-5 lg:gap-6">
           {filteredProducts.map((p) => {
             const isJustAdded = addedIds[p.id];
 
             return (
               <div 
                 key={p.id}
-                className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
-                  {/* Product Image */}
-                  <div className="relative h-28 sm:h-36 md:h-44 lg:h-48 overflow-hidden bg-slate-100">
+                  {/* Product Image with Gradient Vignette */}
+                  <div className="relative h-32 sm:h-40 md:h-48 overflow-hidden bg-slate-100">
                     <img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
                       loading="lazy"
                     />
-                    <div className="absolute top-1.5 sm:top-2.5 left-1.5 sm:left-2.5">
-                      <span className="bg-emerald-900/90 text-amber-300 text-[9px] sm:text-[11px] font-black px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-md backdrop-blur-sm shadow-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+
+                    {/* Tag Top Left */}
+                    <div className="absolute top-2 left-2">
+                      <span className="bg-[#031d10]/90 text-amber-300 text-[9px] sm:text-[11px] font-black px-2 py-0.5 sm:py-1 rounded-lg backdrop-blur-md shadow-sm border border-amber-400/30">
                         {p.tag}
                       </span>
                     </div>
+
+                    {/* Fat / Quality Badge Top Right */}
                     {p.fat && (
-                      <div className="absolute top-1.5 sm:top-2.5 right-1.5 sm:right-2.5">
-                        <span className="bg-white/95 text-slate-800 text-[8px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm border border-slate-200">
+                      <div className="absolute top-2 right-2">
+                        <span className="bg-white/95 text-slate-800 text-[8px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 rounded-md shadow-sm border border-slate-200">
                           {p.fat}
                         </span>
                       </div>
                     )}
                   </div>
 
-                  {/* Product Details */}
-                  <div className="p-2.5 sm:p-4 space-y-1 sm:space-y-2">
-                    <div className="flex justify-between items-start gap-1">
-                      <h4 className="font-bold text-slate-900 text-xs sm:text-sm md:text-base group-hover:text-emerald-700 transition-colors leading-snug line-clamp-1">
-                        {p.name}
-                      </h4>
-                    </div>
+                  {/* Product Text Details */}
+                  <div className="p-3 sm:p-4 space-y-1 sm:space-y-1.5">
+                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm md:text-base group-hover:text-emerald-800 transition-colors leading-snug line-clamp-1">
+                      {p.name}
+                    </h4>
 
-                    <div className="urdu-font text-emerald-800 font-bold text-xs sm:text-sm truncate">
+                    <div className="urdu-font text-amber-700 font-bold text-xs sm:text-sm truncate leading-tight">
                       {p.urduName}
                     </div>
 
-                    <p className="text-slate-600 text-[10px] sm:text-xs line-clamp-2 leading-relaxed">
+                    <p className="text-slate-500 text-[10px] sm:text-xs line-clamp-2 leading-relaxed">
                       {p.description}
                     </p>
 
-                    <div className="pt-0.5 flex items-center justify-between text-[10px] sm:text-xs text-slate-500">
-                      <span className="text-emerald-700 font-medium truncate">✓ {p.freshness}</span>
+                    <div className="pt-0.5 flex items-center justify-between text-[10px] sm:text-xs text-emerald-800 font-semibold">
+                      <span className="truncate">✓ {p.freshness}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Card Bottom / Price & CTA */}
-                <div className="p-2.5 sm:p-4 pt-1.5 sm:pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-1.5 sm:gap-2 mt-auto">
+                {/* Card Footer: Price & Add to Cart */}
+                <div className="p-3 sm:p-4 pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-1.5 sm:gap-2 mt-auto bg-slate-50/60">
                   <div>
                     <span className="text-[10px] sm:text-xs text-slate-400 block leading-tight">{p.unit}</span>
-                    <span className="text-sm sm:text-base md:text-lg font-black text-slate-900 leading-tight">
+                    <span className="text-sm sm:text-base md:text-lg font-black text-emerald-950 leading-tight">
                       Rs. {p.price.toLocaleString()}
                     </span>
                   </div>
 
                   <button
                     onClick={() => handleAdd(p)}
-                    className={`w-full sm:w-auto px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold flex items-center justify-center gap-1 transition-all ${
+                    className={`w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-black flex items-center justify-center gap-1 transition-all shadow-2xs ${
                       isJustAdded
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-700 hover:text-white'
+                        : 'bg-[#063821] text-amber-300 hover:bg-[#031d10] active:scale-95'
                     }`}
                   >
                     {isJustAdded ? (
@@ -156,16 +159,16 @@ export function ProductCatalog({ onAddToCart }) {
           })}
         </div>
 
-        {/* Bulk Catering Banner */}
-        <div className="mt-12 bg-gradient-to-r from-emerald-900 to-emerald-950 text-white rounded-2xl p-6 sm:p-8 shadow-md border border-emerald-800 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center md:text-left">
-            <span className="text-amber-400 text-xs font-black uppercase tracking-wider">
+        {/* Bulk Catering Banner with Royal Wedding Vibe */}
+        <div className="mt-12 sm:mt-16 bg-gradient-to-r from-[#031d10] via-[#063821] to-[#031d10] text-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-amber-500/30 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="space-y-1.5 text-center md:text-left z-10">
+            <span className="bg-amber-400/20 text-amber-300 text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-amber-400/30">
               Special Catering & Wedding Orders
             </span>
-            <h4 className="text-xl sm:text-2xl font-black">
-              Shadi, Khatam & Event Sweet Packs (دیسی گھی حلوہ جات اور کھیر)
+            <h4 className="text-xl sm:text-2xl lg:text-3xl font-black text-white">
+              Shadi, Khatam & Event Sweet Packs (دیسی گھی سوغاتیں)
             </h4>
-            <p className="text-slate-300 text-sm max-w-xl">
+            <p className="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
               We provide pure desi ghee halwa gift packaging, authentic matka kheer boxes, and bulk morning buffalo milk delivery across Sahiwal.
             </p>
           </div>
@@ -174,9 +177,10 @@ export function ProductCatalog({ onAddToCart }) {
             href="https://wa.me/923002743860?text=Salam!%20Mujhe%20shadi/event%20k%20lye%20bulk%20halwa%20aur%20dairy%20order%20chahiye."
             target="_blank"
             rel="noreferrer"
-            className="btn-whatsapp text-sm font-bold px-6 py-3 rounded-xl whitespace-nowrap shadow-md"
+            className="btn-gold-luxury text-xs sm:text-sm px-6 py-3.5 rounded-2xl whitespace-nowrap shadow-xl z-10 flex items-center gap-2"
           >
-            Inquire Bulk WhatsApp: 0300-2743860
+            <span>Inquire Bulk on WhatsApp</span>
+            <ArrowRight size={15} />
           </a>
         </div>
 
@@ -184,4 +188,3 @@ export function ProductCatalog({ onAddToCart }) {
     </section>
   );
 }
-
