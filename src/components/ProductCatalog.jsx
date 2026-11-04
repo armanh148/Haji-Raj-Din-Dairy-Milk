@@ -37,6 +37,7 @@ const categoryTabs = [
 
 export function ProductCatalog({ onAddToCart }) {
   const [activeTabId, setActiveTabId] = useState('fresh-milk');
+  const [gridFilter, setGridFilter] = useState('all');
   const [addedIds, setAddedIds] = useState({});
 
   const activeTab = categoryTabs.find(t => t.id === activeTabId) || categoryTabs[0];
@@ -49,6 +50,16 @@ export function ProductCatalog({ onAddToCart }) {
       setAddedIds(prev => ({ ...prev, [product.id]: false }));
     }, 1200);
   };
+
+  const filteredProducts = gridFilter === 'all'
+    ? products
+    : products.filter(p => {
+        if (gridFilter === 'milk') return p.category === 'fresh-milk' || p.category === 'yogurt';
+        if (gridFilter === 'halwa') return p.category === 'halwajat';
+        if (gridFilter === 'desserts') return p.category === 'kheer-rabri' || p.category === 'icecream';
+        if (gridFilter === 'ghee') return p.category === 'butter-ghee' || p.category === 'khoya' || p.category === 'savory';
+        return true;
+      });
 
   return (
     <section id="products" className="py-16 sm:py-24 bg-white border-t border-slate-100">
@@ -171,19 +182,44 @@ export function ProductCatalog({ onAddToCart }) {
           </div>
         </div>
 
-        {/* 2-Per-Row Responsive Mobile & Desktop Catalog Grid */}
+        {/* Responsive Mobile & Desktop 5-Card Catalog Grid */}
         <div className="space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-            <h4 className="text-xl sm:text-2xl font-black text-[#0a192f]">
-              Full Sahiwal Dairy Menu
-            </h4>
-            <span className="text-xs font-bold text-slate-500">
-              Showing all 12 fresh specialties
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+            <div>
+              <h4 className="text-xl sm:text-2xl font-black text-[#0a192f]">
+                Full Sahiwal Dairy Menu
+              </h4>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Fresh buffalo & cow milk, traditional dahi, pure desi ghee sweets, and dairy staples.
+              </p>
+            </div>
+
+            {/* Quick Filter Buttons */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              {[
+                { id: 'all', label: 'All Specialties' },
+                { id: 'milk', label: 'Milk & Dahi' },
+                { id: 'halwa', label: 'Desi Ghee Halwa' },
+                { id: 'desserts', label: 'Kheer & Kulfa' },
+                { id: 'ghee', label: 'Ghee & Staples' },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setGridFilter(tab.id)}
+                  className={`text-xs font-bold px-3.5 py-1.5 rounded-full transition-all ${
+                    gridFilter === tab.id
+                      ? 'bg-[#0b1e14] text-white shadow-sm'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-4.5">
-            {products.map((p) => {
+            {filteredProducts.map((p) => {
               const isJustAdded = addedIds[p.id];
 
               return (

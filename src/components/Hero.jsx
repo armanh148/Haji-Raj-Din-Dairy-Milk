@@ -57,6 +57,22 @@ export function Hero() {
                 <ArrowRight size={14} />
               </a>
             </div>
+
+            {/* Social Trust Proof */}
+            <div className="pt-1 flex items-center gap-3 text-xs text-slate-500 font-medium">
+              <div className="flex -space-x-1.5">
+                {['🐄', '🥛', '🌿', '🍯'].map((emoji, i) => (
+                  <span key={i} className="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xs shadow-2xs">
+                    {emoji}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-emerald-950">100% Purity Certified</span>
+                <span className="text-slate-300">•</span>
+                <span>3 Outlets in Sahiwal</span>
+              </div>
+            </div>
           </div>
 
         </div>

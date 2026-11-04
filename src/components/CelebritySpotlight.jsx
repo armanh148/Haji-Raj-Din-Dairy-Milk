@@ -32,16 +32,22 @@ export function CelebritySpotlight() {
       <div className="container">
         
         {/* Section Header Matching Agrovia Layout */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 mb-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-600" />
-            Client Feedback
+            <Star size={13} className="fill-amber-400 text-amber-500" />
+            <span>3.8 ★ (38+ Verified Reviews) • Sahiwal Tradition</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0a192f] tracking-tight">
-            Client Feedback
+            Trusted by Sahiwal Families & Artists
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base mt-2">
-            Real experiences from our customers across Madhali Rd, Ghori St & Gujar Ahata branches.
+          <p 
+            style={{ whiteSpace: 'nowrap' }} 
+            className="urdu-font text-base sm:text-xl md:text-2xl font-black text-emerald-950 my-2 py-1 block w-full text-center"
+          >
+            گاہکوں کا اٹوٹ اعتماد اور ساہیوال کی مستند پہچان
+          </p>
+          <p className="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
+            Authentic customer experiences from daily fresh milk pickups and pure desi ghee halwa gift boxes across our 3 branches.
           </p>
         </div>
 

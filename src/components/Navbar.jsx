@@ -6,9 +6,29 @@ export function Navbar({ cartCount, onOpenCart }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all">
-      <div className="container py-4">
-        <div className="flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 transition-all shadow-xs">
+      {/* Top Announcement Bar */}
+      <div className="bg-[#0b1e14] text-white text-[11px] sm:text-xs py-2 px-3 sm:px-6 border-b border-emerald-900/60">
+        <div className="container flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span className="font-bold text-amber-300">🌟 3rd Outlet Now Open:</span>
+            <span className="text-slate-200 hidden sm:inline">Madhali Road Outlet (Near Bypass Chowk, Sahiwal)</span>
+          </div>
+          <div className="flex items-center gap-3 sm:gap-5 text-slate-300 font-semibold text-[11px]">
+            <a href={`tel:${dairyInfo.phoneRaw}`} className="hover:text-amber-300 flex items-center gap-1 transition-colors">
+              <Phone size={12} className="text-emerald-400" />
+              <span>0300-2743860</span>
+            </a>
+            <span className="hidden md:inline text-slate-600">|</span>
+            <span className="hidden md:inline text-emerald-300 font-bold">100% Pure Natural Dairy</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white/95 backdrop-blur-md border-b border-slate-100">
+        <div className="container py-3.5">
+          <div className="flex items-center justify-between gap-4">
           
           {/* Logo Matching Agrovia Clean Typography */}
           <a href="#" className="flex items-center gap-2.5 group text-decoration-none">
@@ -113,6 +133,7 @@ export function Navbar({ cartCount, onOpenCart }) {
             </div>
           </div>
         )}
+        </div>
       </div>
     </header>
   );

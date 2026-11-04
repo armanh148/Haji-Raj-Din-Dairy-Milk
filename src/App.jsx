@@ -5,6 +5,7 @@ import { AboutFarm } from './components/AboutFarm';
 import { AdvantageCards } from './components/AdvantageCards';
 import { ProductCatalog } from './components/ProductCatalog';
 import { CelebritySpotlight } from './components/CelebritySpotlight';
+import { BranchAnnouncement } from './components/BranchAnnouncement';
 import { BranchLocations } from './components/BranchLocations';
 import { OrderCalculator } from './components/OrderCalculator';
 import { PosPitchSection } from './components/PosPitchSection';
@@ -79,6 +80,9 @@ export function App() {
 
         {/* Section 5: Client Feedback 3 Cards + Ramzan Jani Video */}
         <CelebritySpotlight />
+
+        {/* Section 5.5: Grand Opening of 3rd Outlet on Madhali Road */}
+        <BranchAnnouncement />
 
         {/* Section 6: 3 Sahiwal Branches Detailed Showcase */}
         <BranchLocations />
