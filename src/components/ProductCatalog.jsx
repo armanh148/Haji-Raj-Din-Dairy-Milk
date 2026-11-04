@@ -55,15 +55,18 @@ export function ProductCatalog({ onAddToCart }) {
       <div className="container">
         
         {/* Section Header Matching Agrovia Layout */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 mb-3">
             <span className="w-2 h-2 rounded-full bg-emerald-600" />
             Our Pure Range
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0a192f] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0a192f] tracking-tight mb-1">
             Fresh & Pure Dairy Specialties
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base mt-2">
+          <p className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 whitespace-nowrap overflow-x-auto scrollbar-none py-1">
+            خالص دودھ، تازہ دہی اور لذیذ دیسی گھی سوغاتیں
+          </p>
+          <p className="text-slate-500 text-sm sm:text-base mt-1">
             Crafted daily with unadulterated milk and authentic desi ghee.
           </p>
         </div>
