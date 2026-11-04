@@ -102,36 +102,42 @@ export function ProductCatalog({ onAddToCart }) {
         >
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Column: Interactive Vertical Category List */}
-            <div className="lg:col-span-4 space-y-2">
+            {/* Left Column: Interactive Category List (2 per row on mobile, 1 on desktop) */}
+            <div className="lg:col-span-4">
               <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block mb-3">
                 Select Category
               </span>
 
-              {categoryTabs.map((cat) => {
-                const isActive = cat.id === activeTabId;
-                return (
-                  <motion.button
-                    key={cat.id}
-                    onClick={() => setActiveTabId(cat.id)}
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full text-left p-3.5 rounded-2xl font-black text-sm sm:text-base transition-all flex items-center justify-between ${
-                      isActive
-                        ? 'bg-[#0b1e14] text-white shadow-lg'
-                        : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80'
-                    }`}
-                  >
-                    <div>
-                      <span>{cat.name}</span>
-                      <span className={`block text-xs font-bold urdu-font mt-0.5 ${isActive ? 'text-emerald-300' : 'text-slate-400'}`}>
-                        {cat.urdu}
-                      </span>
-                    </div>
-                    {isActive && <ArrowRight size={18} className="text-emerald-400" />}
-                  </motion.button>
-                );
-              })}
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-2.5">
+                {categoryTabs.map((cat, idx) => {
+                  const isActive = cat.id === activeTabId;
+                  const isLastOdd = idx === categoryTabs.length - 1 && categoryTabs.length % 2 !== 0;
+
+                  return (
+                    <motion.button
+                      key={cat.id}
+                      onClick={() => setActiveTabId(cat.id)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.97 }}
+                      className={`w-full text-left p-2.5 sm:p-3.5 rounded-2xl font-black transition-all flex items-center justify-between ${
+                        isLastOdd ? 'col-span-2 lg:col-span-1' : ''
+                      } ${
+                        isActive
+                          ? 'bg-[#0b1e14] text-white shadow-lg ring-1 ring-emerald-500/30'
+                          : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 shadow-2xs'
+                      }`}
+                    >
+                      <div className="pr-1 min-w-0">
+                        <span className="block truncate text-xs sm:text-sm lg:text-base font-extrabold">{cat.name}</span>
+                        <span className={`block text-[11px] sm:text-xs font-bold urdu-font mt-0.5 truncate ${isActive ? 'text-emerald-300' : 'text-slate-400'}`}>
+                          {cat.urdu}
+                        </span>
+                      </div>
+                      {isActive && <ArrowRight size={16} className="text-emerald-400 shrink-0 hidden sm:block" />}
+                    </motion.button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Center Column: Big Focal Showcase Image with AnimatePresence */}
