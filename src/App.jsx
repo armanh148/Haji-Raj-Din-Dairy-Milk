@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
+import { ScrollProgress } from './components/ScrollProgress';
 import { Hero } from './components/Hero';
 import { AboutFarm } from './components/AboutFarm';
 import { AdvantageCards } from './components/AdvantageCards';
@@ -58,6 +60,9 @@ export function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      {/* Top Animated Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Agrovia Clean Navbar */}
       <Navbar
         cartCount={totalCartCount}
@@ -110,27 +115,31 @@ export function App() {
         onClearCart={handleClearCart}
       />
 
-      {/* Floating Action Buttons for Instant WhatsApp & Phone on Mobile */}
+      {/* Floating Action Buttons for Instant WhatsApp & Phone with Motion */}
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2.5 items-end">
-        <a
+        <motion.a
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
           href={`https://wa.me/${dairyInfo.phoneRaw}?text=Salam%20Haji%20Raj%20Din%20Dairy!%20Mujhe%20fresh%20milk%20aur%20sweets%20ka%20order%20karna%20hai.`}
           target="_blank"
           rel="noreferrer"
-          className="bg-[#25D366] hover:bg-[#1eb956] text-white p-3.5 sm:px-5 sm:py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold text-sm transform hover:scale-105 transition-all"
+          className="bg-[#25D366] hover:bg-[#1eb956] text-white p-3.5 sm:px-5 sm:py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold text-sm"
           title="WhatsApp Order: 0300-2743860"
         >
           <MessageCircle size={22} />
           <span className="hidden sm:inline">WhatsApp Order</span>
-        </a>
+        </motion.a>
 
-        <a
+        <motion.a
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.94 }}
           href={`tel:${dairyInfo.phoneRaw}`}
-          className="bg-[#0b1e14] hover:bg-slate-900 text-white p-3.5 sm:px-4 sm:py-2.5 rounded-full shadow-xl flex items-center gap-2 font-semibold text-xs border border-white/20 transition-all"
+          className="bg-[#0b1e14] hover:bg-slate-900 text-white p-3.5 sm:px-4 sm:py-2.5 rounded-full shadow-xl flex items-center gap-2 font-semibold text-xs border border-white/20"
           title="Call: 0300-2743860"
         >
           <Phone size={17} className="text-emerald-400" />
           <span className="hidden sm:inline">0300-2743860</span>
-        </a>
+        </motion.a>
       </div>
     </div>
   );

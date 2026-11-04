@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { dairyInfo } from '../data/dairyData';
 
 export function NewsletterFarmBanner() {
@@ -20,7 +21,13 @@ export function NewsletterFarmBanner() {
       <div className="container mb-12 sm:mb-16">
         
         {/* Top Split Row: Newsletter / Subscription (Exact Agrovia Match) */}
-        <div className="grid lg:grid-cols-12 gap-8 items-center pb-12 border-b border-emerald-900/60">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid lg:grid-cols-12 gap-8 items-center pb-12 border-b border-emerald-900/60"
+        >
           
           <div className="lg:col-span-6 space-y-2">
             <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
@@ -42,13 +49,15 @@ export function NewsletterFarmBanner() {
                 className="flex-1 bg-white/10 text-white placeholder-slate-400 border border-white/20 rounded-full px-5 py-3.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 required
               />
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 type="submit"
-                className="bg-white hover:bg-slate-100 text-[#0b1e14] font-black text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap shadow-lg"
+                className="bg-white hover:bg-slate-100 text-[#0b1e14] font-black text-xs uppercase tracking-wider px-7 py-3.5 rounded-full transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap shadow-lg cursor-pointer"
               >
                 <span>Subscribe on WhatsApp</span>
                 <ArrowRight size={15} />
-              </button>
+              </motion.button>
             </form>
             {submitted && (
               <p className="text-xs text-emerald-300 mt-2 font-bold flex items-center gap-1">
@@ -57,16 +66,16 @@ export function NewsletterFarmBanner() {
             )}
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
 
-      {/* Panoramic Countryside Farm Photo (Exact Agrovia Match) */}
-      <div className="w-full relative h-[260px] sm:h-[380px] md:h-[460px] overflow-hidden">
+      {/* Panoramic Countryside Farm Photo (Exact Agrovia Match with Slow Parallax Scale) */}
+      <div className="w-full relative h-[260px] sm:h-[380px] md:h-[460px] overflow-hidden group">
         <img
           src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80"
           alt="Sahiwal Countryside Dairy Fields and Cattle"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1e14] via-transparent to-transparent opacity-80" />
       </div>
@@ -74,4 +83,3 @@ export function NewsletterFarmBanner() {
     </section>
   );
 }
-

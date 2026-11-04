@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { dairyInfo, branches } from '../data/dairyData';
-import { MessageCircle, ShoppingBag, Plus, Minus, MapPin, Calculator, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Calculator, MessageCircle, Plus, Minus, CheckCircle, Sparkles, Send } from 'lucide-react';
 
-const defaultItems = [
-  { id: 'milk', name: 'Fresh Buffalo Milk (خالص بھینس کا دودھ)', unit: 'Litre', price: 240, qty: 2 },
-  { id: 'dahi', name: 'Thick Matka Dahi (گاڑھا ملائی دار دہی)', unit: 'Kg', price: 260, qty: 1 },
-  { id: 'halwa', name: 'Desi Ghee Sohan Halwa (سوہن حلوہ)', unit: 'Kg', price: 1450, qty: 0 },
-  { id: 'kheer', name: 'Matka Khoya Kheer (شاہی کھویا کھیر)', unit: 'Bowl', price: 320, qty: 2 },
-  { id: 'kulfa', name: 'Shahi Dairy Kulfa (شاہی ڈیری قلفہ)', unit: 'Pcs', price: 150, qty: 0 },
-  { id: 'ghee', name: 'Pure Desi Ghee Jar (خالص دیسی گھی)', unit: 'Kg', price: 2400, qty: 0 },
+const initialItems = [
+  { id: 'buffalo-milk', name: 'Farm Fresh Buffalo Milk (بھینس کا دودھ)', price: 240, unit: 'Litre', qty: 2 },
+  { id: 'cow-milk', name: 'Pure Cow Milk A2 (گائے کا دودھ)', price: 220, unit: 'Litre', qty: 0 },
+  { id: 'dahi', name: 'Traditional Matka Dahi (ملائی دار دہی)', price: 260, unit: 'Kg', qty: 1 },
+  { id: 'sohan-halwa', name: 'Pure Desi Ghee Sohan Halwa (سوہن حلوہ)', price: 1450, unit: 'Kg Box', qty: 1 },
+  { id: 'gajar-halwa', name: 'Desi Ghee Gajar Halwa (گاجر حلوہ کھویا)', price: 1100, unit: 'Kg', qty: 0 },
+  { id: 'kheer', name: 'Special Matka Khoya Kheer (کھویا کھیر)', price: 320, unit: 'Bowl', qty: 0 },
+  { id: 'desi-ghee', name: 'Pure Desi Ghee Danedar (دیسی گھی)', price: 2800, unit: 'Kg', qty: 0 },
+  { id: 'makhan', name: 'Farm Fresh Butter (تازہ مکھن)', price: 700, unit: '250g', qty: 0 },
 ];
 
 export function OrderCalculator() {
-  const [items, setItems] = useState(defaultItems);
+  const [items, setItems] = useState(initialItems);
   const [selectedBranch, setSelectedBranch] = useState(branches[0].name);
-  const [orderType, setOrderType] = useState('Home Delivery in Sahiwal');
   const [customerName, setCustomerName] = useState('');
   const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  const [orderType, setOrderType] = useState('Home Delivery in Sahiwal');
   const [specialNote, setSpecialNote] = useState('');
 
-  // Update item quantity
-  const updateQty = (id, change) => {
-    setItems(prev => prev.map(item => {
-      if (item.id === id) {
-        const newQty = Math.max(0, item.qty + change);
-        return { ...item, qty: newQty };
-      }
-      return item;
-    }));
+  const updateQty = (id, delta) => {
+    setItems(prev =>
+      prev.map(item => {
+        if (item.id === id) {
+          const next = item.qty + delta;
+          return { ...item, qty: next >= 0 ? next : 0 };
+        }
+        return item;
+      })
+    );
   };
 
-  const totalAmount = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const totalAmount = items.reduce((sum, item) => sum + item.qty * item.price, 0);
   const totalItemsCount = items.reduce((sum, item) => sum + item.qty, 0);
 
-  // Generate formatted WhatsApp URL
   const generateWhatsAppMessage = () => {
     const selectedList = items.filter(i => i.qty > 0);
+    if (selectedList.length === 0) return '#';
 
-    let msg = `*Assalam-o-Alaikum! Haji Raj Din Dairy Milk Sahiwal* 🥛\n`;
-    msg += `Naya Order Details:\n\n`;
-    msg += `📍 *Selected Branch:* ${selectedBranch}\n`;
+    let msg = `*Assalam-o-Alaikum Haji Raj Din Dairy!*\n`;
+    msg += `Main website calculator se order place karna chahta hoon.\n\n`;
+    msg += `📍 *Branch:* ${selectedBranch}\n`;
     msg += `📦 *Order Type:* ${orderType}\n`;
-
     if (customerName) msg += `👤 *Customer Name:* ${customerName}\n`;
-    if (phone) msg += `📞 *Customer Phone:* ${phone}\n`;
-    if (address && orderType.includes('Delivery')) msg += `🏠 *Delivery Address:* ${address}, Sahiwal\n`;
+    if (address && orderType.includes('Delivery')) msg += `🏠 *Delivery Address:* ${address}\n`;
 
     msg += `\n*Order Items:*\n`;
     selectedList.forEach((item, index) => {
@@ -60,11 +61,17 @@ export function OrderCalculator() {
   };
 
   return (
-    <section id="calculator" className="py-16 sm:py-20 bg-white border-t border-slate-200/80 relative">
+    <section id="calculator" className="py-16 sm:py-20 bg-white border-t border-slate-200/80 relative overflow-hidden">
       <div className="container">
         
         {/* Section Header */}
-        <div className="text-center w-full max-w-5xl mx-auto mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center w-full max-w-5xl mx-auto mb-12"
+        >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-300 mb-3 shadow-2xs">
             <Calculator size={14} className="text-emerald-700" />
             Fast WhatsApp Order Assistant
@@ -81,9 +88,15 @@ export function OrderCalculator() {
           <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
             Select your preferred branch in Sahiwal, adjust your required quantities, and send your order directly to our official WhatsApp (<strong>0300-2743860</strong>).
           </p>
-        </div>
+        </motion.div>
 
-        <div className="w-full bg-[#fbf9f3] rounded-3xl p-5 sm:p-8 lg:p-12 border border-slate-200/90 shadow-xl">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="w-full bg-[#fbf9f3] rounded-3xl p-5 sm:p-8 lg:p-12 border border-slate-200/90 shadow-xl"
+        >
           <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
             
             {/* Left: Item Selectors */}
@@ -99,8 +112,9 @@ export function OrderCalculator() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {items.map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    whileHover={{ scale: 1.01 }}
                     className={`p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between ${
                       item.qty > 0 
                         ? 'bg-white border-amber-500/80 shadow-md ring-1 ring-amber-400/30' 
@@ -117,26 +131,28 @@ export function OrderCalculator() {
                     </div>
 
                     <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-                      <button
+                      <motion.button
+                        whileTap={{ scale: 0.82 }}
                         onClick={() => updateQty(item.id, -1)}
                         className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-sm transition-colors"
                         disabled={item.qty === 0}
                       >
                         <Minus size={14} />
-                      </button>
+                      </motion.button>
 
                       <span className="w-7 text-center font-black text-slate-900 text-sm">
                         {item.qty}
                       </span>
 
-                      <button
+                      <motion.button
+                        whileTap={{ scale: 0.82 }}
                         onClick={() => updateQty(item.id, 1)}
                         className="w-8 h-8 rounded-xl bg-[#063821] hover:bg-[#031d10] text-amber-300 flex items-center justify-center font-bold text-sm transition-colors shadow-2xs"
                       >
                         <Plus size={14} />
-                      </button>
+                      </motion.button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -220,16 +236,24 @@ export function OrderCalculator() {
                 </div>
               </div>
 
-              {/* Total Calculation & Send Order Button */}
+              {/* Total Calculation & Send Order Button with Animated Key */}
               <div className="pt-4 border-t border-slate-100 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500 text-xs font-bold uppercase tracking-wider">Estimated Total:</span>
-                  <span className="text-2xl sm:text-3xl font-black text-emerald-950">
+                  <motion.span 
+                    key={totalAmount}
+                    initial={{ scale: 1.15, color: '#059669' }}
+                    animate={{ scale: 1, color: '#022c22' }}
+                    transition={{ duration: 0.25 }}
+                    className="text-2xl sm:text-3xl font-black text-emerald-950"
+                  >
                     Rs. {totalAmount.toLocaleString()}
-                  </span>
+                  </motion.span>
                 </div>
 
-                <a
+                <motion.a
+                  whileHover={totalAmount > 0 ? { scale: 1.02 } : {}}
+                  whileTap={totalAmount > 0 ? { scale: 0.98 } : {}}
                   href={generateWhatsAppMessage()}
                   target="_blank"
                   rel="noreferrer"
@@ -241,7 +265,7 @@ export function OrderCalculator() {
                 >
                   <MessageCircle size={19} />
                   <span>Send Order to 0300-2743860</span>
-                </a>
+                </motion.a>
 
                 <p className="text-[11px] text-center text-slate-400 font-medium">
                   Instant confirmation from Haji Raj Din team (6:00 AM - 11:30 PM).
@@ -251,7 +275,7 @@ export function OrderCalculator() {
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

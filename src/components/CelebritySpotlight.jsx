@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { celebrityVisit, customerReviews, dairyInfo } from '../data/dairyData';
-import { Star, Play, CheckCircle2, ExternalLink, Video, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { Star, Play, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function CelebritySpotlight() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,7 +12,7 @@ export function CelebritySpotlight() {
     if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % totalReviews);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(timer);
   }, [isPaused, totalReviews]);
 
@@ -28,11 +29,17 @@ export function CelebritySpotlight() {
   };
 
   return (
-    <section id="celebrity" className="py-16 sm:py-24 bg-white border-t border-slate-100">
+    <section id="celebrity" className="py-16 sm:py-24 bg-white border-t border-slate-100 overflow-hidden">
       <div className="container">
         
         {/* Section Header Matching Agrovia Layout */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+        >
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 mb-3">
             <Star size={13} className="fill-amber-400 text-amber-500" />
             <span>3.8 ★ (38+ Verified Reviews) • Sahiwal Tradition</span>
@@ -49,7 +56,7 @@ export function CelebritySpotlight() {
           <p className="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
             Authentic customer experiences from daily fresh milk pickups and pure desi ghee halwa gift boxes across our 3 branches.
           </p>
-        </div>
+        </motion.div>
 
         {/* 3 Clean Client Feedback Cards (Exact Agrovia Match with Auto-Loop) */}
         <div 
@@ -64,9 +71,13 @@ export function CelebritySpotlight() {
               const isHiddenOnMobile = slotOffset === 1 ? 'hidden md:flex' : '';
 
               return (
-                <div
+                <motion.div
                   key={`${review.id}-${currentIndex}-${slotOffset}`}
-                  className={`${isHiddenOnTablet} ${isHiddenOnMobile} bg-white p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-xl transition-all duration-300 flex-col justify-between`}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: slotOffset * 0.08 }}
+                  whileHover={{ y: -6, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.08)" }}
+                  className={`${isHiddenOnTablet} ${isHiddenOnMobile} bg-white p-7 rounded-3xl border border-slate-200 shadow-xs transition-all duration-300 flex-col justify-between`}
                 >
                   <div className="space-y-4">
                     {/* Stars */}
@@ -77,8 +88,9 @@ export function CelebritySpotlight() {
                     </div>
 
                     {/* Satisfaction score badge (matching Agrovia card top) */}
-                    <div className="text-xs font-black uppercase tracking-wider text-slate-800">
-                      100% Customer Satisfaction
+                    <div className="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                      <span>100% Customer Satisfaction</span>
                     </div>
 
                     {/* Review text */}
@@ -89,7 +101,7 @@ export function CelebritySpotlight() {
 
                   {/* Customer author footer */}
                   <div className="pt-6 border-t border-slate-100 mt-6 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#0b1e14] text-white flex items-center justify-center font-black text-xs">
+                    <div className="w-10 h-10 rounded-full bg-[#0b1e14] text-white flex items-center justify-center font-black text-xs shadow-sm">
                       {review.name.charAt(0)}
                     </div>
                     <div>
@@ -101,20 +113,21 @@ export function CelebritySpotlight() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Carousel Controls */}
           <div className="flex items-center justify-center gap-3 mt-8">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.88 }}
               onClick={handlePrev}
-              className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0b1e14] hover:text-white text-slate-700 flex items-center justify-center transition-colors"
+              className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0b1e14] hover:text-white text-slate-700 flex items-center justify-center transition-colors shadow-2xs"
               title="Previous"
             >
               <ChevronLeft size={18} />
-            </button>
+            </motion.button>
             
             <div className="flex items-center gap-1.5">
               {customerReviews.map((_, idx) => (
@@ -128,40 +141,53 @@ export function CelebritySpotlight() {
               ))}
             </div>
 
-            <button
+            <motion.button
+              whileTap={{ scale: 0.88 }}
               onClick={handleNext}
-              className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0b1e14] hover:text-white text-slate-700 flex items-center justify-center transition-colors"
+              className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#0b1e14] hover:text-white text-slate-700 flex items-center justify-center transition-colors shadow-2xs"
               title="Next"
             >
               <ChevronRight size={18} />
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        {/* Famous Singer Ramzan Jani Video Feature Card */}
-        <div className="bg-[#faf9f6] rounded-3xl p-6 sm:p-10 border border-slate-200">
+        {/* Famous Singer Ramzan Jani Video Feature Card with Motion */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="bg-[#faf9f6] rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm"
+        >
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-video bg-black shadow-lg">
+            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-video bg-black shadow-xl group">
               <img
                 src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=700&q=80"
                 alt="Singer Ramzan Jani visit"
-                className="w-full h-full object-cover opacity-60"
+                className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
               />
               <a
                 href={celebrityVisit.videoLink}
                 target="_blank"
                 rel="noreferrer"
-                className="absolute inset-0 flex items-center justify-center group"
+                className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="w-16 h-16 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                  <Play size={24} className="fill-slate-900 ml-1" />
-                </div>
+                {/* Rippling Pulse Behind Play Button */}
+                <span className="absolute w-20 h-20 rounded-full bg-white/30 animate-ping" />
+                <motion.div 
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-16 h-16 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-2xl relative z-10"
+                >
+                  <Play size={24} className="fill-slate-900 ml-1 text-slate-900" />
+                </motion.div>
               </a>
             </div>
 
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-emerald-800 bg-emerald-100/70 px-3 py-0.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-emerald-800 bg-emerald-100/70 px-3 py-1 rounded-full">
                 <span>VIP Celebrity Endorsement</span>
               </div>
 
@@ -169,7 +195,7 @@ export function CelebritySpotlight() {
                 {celebrityVisit.celebrityName} — {celebrityVisit.celebrityRole}
               </h3>
 
-              <blockquote className="border-l-4 border-emerald-700 pl-4">
+              <blockquote className="border-l-4 border-emerald-700 pl-4 py-1">
                 <p className="urdu-font text-base sm:text-lg text-emerald-950 font-bold leading-relaxed">
                   "{celebrityVisit.urduComment}"
                 </p>
@@ -179,30 +205,33 @@ export function CelebritySpotlight() {
               </blockquote>
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
                   href={celebrityVisit.videoLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5"
+                  className="btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5 shadow-md"
                 >
-                  <Video size={14} />
-                  <span>Watch Video on Facebook</span>
-                </a>
+                  <span>Watch Facebook Video</span>
+                  <Play size={13} className="fill-white" />
+                </motion.a>
 
-                <a
-                  href={dairyInfo.yandexUrl}
+                <motion.a
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Ramzan%20Jani%20wala%20doodh%20aur%20sohan%20halwa%20order%20karna%20hai.`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-bold text-slate-700 hover:text-emerald-800 underline underline-offset-4 flex items-center gap-1 px-2"
+                  className="btn-whatsapp-luxury text-xs font-bold px-4 py-2.5 rounded-full flex items-center gap-1.5"
                 >
-                  <span>View 38+ Reviews on Yandex</span>
-                  <ExternalLink size={12} />
-                </a>
+                  <span>Order Same Quality</span>
+                </motion.a>
               </div>
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
