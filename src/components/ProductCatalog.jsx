@@ -182,7 +182,7 @@ export function ProductCatalog({ onAddToCart }) {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-4.5">
             {products.map((p) => {
               const isJustAdded = addedIds[p.id];
 
@@ -193,7 +193,7 @@ export function ProductCatalog({ onAddToCart }) {
                 >
                   <div>
                     {/* Image */}
-                    <div className="relative h-32 sm:h-44 md:h-48 overflow-hidden bg-slate-100">
+                    <div className="relative h-32 sm:h-36 md:h-40 lg:h-44 overflow-hidden bg-slate-100">
                       <img
                         src={p.image}
                         alt={p.name}
@@ -208,12 +208,12 @@ export function ProductCatalog({ onAddToCart }) {
                     </div>
 
                     {/* Details */}
-                    <div className="p-3 sm:p-4 space-y-1">
+                    <div className="p-3 sm:p-3.5 space-y-1">
                       <h5 className="font-extrabold text-slate-900 text-xs sm:text-sm md:text-base group-hover:text-emerald-800 transition-colors line-clamp-1">
                         {p.name}
                       </h5>
 
-                      <div className="urdu-font text-emerald-800 font-bold text-xs sm:text-sm truncate leading-tight">
+                      <div className="urdu-font text-emerald-800 font-bold text-xs sm:text-sm truncate leading-tight my-0.5">
                         {p.urduName}
                       </div>
 
@@ -224,17 +224,17 @@ export function ProductCatalog({ onAddToCart }) {
                   </div>
 
                   {/* Card Bottom: Price & Button */}
-                  <div className="p-3 sm:p-4 pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-1.5 mt-auto bg-slate-50/50">
+                  <div className="p-2.5 sm:p-3.5 pt-2 border-t border-slate-100 flex items-center justify-between gap-1.5 mt-auto bg-slate-50/50">
                     <div>
                       <span className="text-[10px] text-slate-400 block leading-tight">{p.unit}</span>
-                      <span className="text-sm sm:text-base font-black text-slate-900 leading-tight">
+                      <span className="text-xs sm:text-sm md:text-base font-black text-slate-900 leading-tight">
                         Rs. {p.price.toLocaleString()}
                       </span>
                     </div>
 
                     <button
                       onClick={() => handleAdd(p)}
-                      className={`w-full sm:w-auto px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-black flex items-center justify-center gap-1 transition-all ${
+                      className={`px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-black flex items-center justify-center gap-1 transition-all shrink-0 ${
                         isJustAdded
                           ? 'bg-emerald-700 text-white'
                           : 'bg-[#0b1e14] text-white hover:bg-emerald-900'
