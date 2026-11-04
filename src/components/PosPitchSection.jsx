@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Monitor, AlertTriangle, RefreshCw, BarChart3, Database, ShieldAlert, CheckCircle2, ArrowRight, Printer, Sparkles, Smartphone, Store } from 'lucide-react';
+import { Monitor, AlertTriangle, Database, Smartphone, Printer, Sparkles, Store, CheckCircle2, ArrowRight } from 'lucide-react';
 import { dairyInfo, branches } from '../data/dairyData';
 
 export function PosPitchSection() {
@@ -35,23 +35,23 @@ export function PosPitchSection() {
   };
 
   return (
-    <section id="pos-pitch" className="py-16 bg-gradient-to-b from-slate-900 via-emerald-950 to-slate-950 text-white relative overflow-hidden">
+    <section id="pos-pitch" className="py-16 sm:py-20 bg-gradient-to-b from-[#02180d] via-[#052b19] to-[#01120a] text-white relative overflow-hidden">
       
       {/* Decorative tech grid backdrop */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
 
       <div className="container relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-emerald-950 mb-3 shadow-md">
-            <Sparkles size={14} className="fill-emerald-950" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 mb-3 shadow-md">
+            <Sparkles size={14} className="fill-slate-950" />
             Special Pitch for Haji Raj Din Management
           </div>
-          <h2 className="urdu-font text-3xl sm:text-4xl font-black text-amber-300 mb-2">
+          <h2 className="urdu-font text-3xl sm:text-4xl lg:text-5xl font-black text-amber-300 mb-2 leading-relaxed">
             ملٹی برانچ ویب سائٹ اور ڈیسک ٹاپ سٹاک ایکسپائری پی او ایس سسٹم
           </h2>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Scale Haji Raj Din Dairy with Modern Multi-Branch Tech
           </h3>
           <p className="text-slate-300 text-sm sm:text-base mt-2">
@@ -61,26 +61,26 @@ export function PosPitchSection() {
         </div>
 
         {/* Tab Switcher - Mobile / Tablet / Laptop Responsive */}
-        <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10">
+        <div className="flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-12">
           <button
             onClick={() => setActiveTab('features')}
-            className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+            className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 ${
               activeTab === 'features'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/50'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-xl shadow-emerald-950/60 border border-emerald-400/40'
+                : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
             }`}
           >
             <Monitor size={16} /> Why Haji Raj Din Needs This
           </button>
           <button
             onClick={() => setActiveTab('simulator')}
-            className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 ${
+            className={`px-5 py-3 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 ${
               activeTab === 'simulator'
-                ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-900/50 font-black'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                ? 'btn-gold-luxury text-slate-950 shadow-xl'
+                : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
             }`}
           >
-            <Store size={16} /> Live Interactive POS Simulator
+            <Store size={16} /> Live Interactive POS Terminal Simulator
           </button>
         </div>
 
@@ -88,13 +88,13 @@ export function PosPitchSection() {
         {activeTab === 'features' && (
           <div className="space-y-8 sm:space-y-12">
             {/* The 3 Core Pain Points Solved - 2 Per Row on Mobile */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6">
               
               {/* Card 1 */}
-              <div className="bg-slate-800/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6 border border-slate-700 hover:border-emerald-500 transition-all flex flex-col justify-between">
+              <div className="bg-[#031d10]/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-emerald-500/20 hover:border-amber-400/50 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                  <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center mb-2.5 sm:mb-4 border border-red-500/30">
-                    <AlertTriangle size={18} className="sm:w-6 sm:h-6" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-500/15 text-red-400 flex items-center justify-center mb-3 sm:mb-4 border border-red-500/30">
+                    <AlertTriangle size={20} className="sm:w-6 sm:h-6" />
                   </div>
                   <h4 className="text-xs sm:text-base md:text-lg font-black text-white mb-1.5 sm:mb-2 leading-snug">
                     1. Zero Milk Wastage (Expiry)
@@ -103,16 +103,16 @@ export function PosPitchSection() {
                     Tracks morning vs evening batches in chiller tanks. Triggers visual alerts 4 hours before turning sour so it can be converted into Khoya or Desi Ghee.
                   </p>
                 </div>
-                <div className="mt-3 pt-2 sm:mt-4 sm:pt-3 border-t border-slate-700/60 text-[10px] sm:text-xs font-bold text-amber-300 flex items-center gap-1">
+                <div className="mt-3.5 pt-2.5 sm:mt-4 sm:pt-3 border-t border-emerald-900/80 text-[10px] sm:text-xs font-bold text-amber-300 flex items-center gap-1">
                   ✓ Batch logs & chiller alerts
                 </div>
               </div>
 
               {/* Card 2 */}
-              <div className="bg-slate-800/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6 border border-slate-700 hover:border-emerald-500 transition-all flex flex-col justify-between">
+              <div className="bg-[#031d10]/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-emerald-500/20 hover:border-amber-400/50 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                  <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2.5 sm:mb-4 border border-emerald-500/30">
-                    <Database size={18} className="sm:w-6 sm:h-6" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-3 sm:mb-4 border border-emerald-500/30">
+                    <Database size={20} className="sm:w-6 sm:h-6" />
                   </div>
                   <h4 className="text-xs sm:text-base md:text-lg font-black text-white mb-1.5 sm:mb-2 leading-snug">
                     2. 3-Branch Inventory Sync
@@ -121,16 +121,16 @@ export function PosPitchSection() {
                     Syncs between Ghori St, Gujar Ahata & Madhali Rd. Know exactly how many Litres of milk and Kg of Halwa sold at each branch from your phone.
                   </p>
                 </div>
-                <div className="mt-3 pt-2 sm:mt-4 sm:pt-3 border-t border-slate-700/60 text-[10px] sm:text-xs font-bold text-emerald-300 flex items-center gap-1">
+                <div className="mt-3.5 pt-2.5 sm:mt-4 sm:pt-3 border-t border-emerald-900/80 text-[10px] sm:text-xs font-bold text-emerald-300 flex items-center gap-1">
                   ✓ Multi-branch transfer receipts
                 </div>
               </div>
 
               {/* Card 3 */}
-              <div className="col-span-2 lg:col-span-1 bg-slate-800/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6 border border-slate-700 hover:border-emerald-500 transition-all flex flex-col justify-between">
+              <div className="col-span-2 lg:col-span-1 bg-[#031d10]/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-emerald-500/20 hover:border-amber-400/50 transition-all flex flex-col justify-between shadow-lg">
                 <div>
-                  <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-2.5 sm:mb-4 border border-amber-500/30">
-                    <Smartphone size={18} className="sm:w-6 sm:h-6" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-3 sm:mb-4 border border-amber-500/30">
+                    <Smartphone size={20} className="sm:w-6 sm:h-6" />
                   </div>
                   <h4 className="text-xs sm:text-base md:text-lg font-black text-white mb-1.5 sm:mb-2 leading-snug">
                     3. Turn Video Ads Into Orders
@@ -139,7 +139,7 @@ export function PosPitchSection() {
                     Turn paid Facebook video ad viewers directly into WhatsApp order customers in 1 click instead of losing leads.
                   </p>
                 </div>
-                <div className="mt-3 pt-2 sm:mt-4 sm:pt-3 border-t border-slate-700/60 text-[10px] sm:text-xs font-bold text-amber-300 flex items-center gap-1">
+                <div className="mt-3.5 pt-2.5 sm:mt-4 sm:pt-3 border-t border-emerald-900/80 text-[10px] sm:text-xs font-bold text-amber-300 flex items-center gap-1">
                   ✓ WhatsApp order checkout
                 </div>
               </div>
@@ -147,7 +147,7 @@ export function PosPitchSection() {
             </div>
 
             {/* Speed & Hardware Compatibility Highlights */}
-            <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 p-6 sm:p-8 rounded-3xl border border-emerald-800">
+            <div className="bg-gradient-to-r from-[#031d10] via-[#052b19] to-[#031d10] p-6 sm:p-8 lg:p-10 rounded-3xl border border-amber-500/30 shadow-2xl">
               <div className="grid lg:grid-cols-12 gap-8 items-center">
                 
                 <div className="lg:col-span-7 space-y-4">
@@ -163,7 +163,7 @@ export function PosPitchSection() {
                     instant weighing-scale integration, and Urdu thermal printing.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-3 text-xs text-slate-200 pt-2">
+                  <div className="grid grid-cols-2 gap-3 text-xs text-slate-200 pt-2 font-medium">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-emerald-400" />
                       <span>Works 100% Offline (No Internet Needed)</span>
@@ -183,18 +183,18 @@ export function PosPitchSection() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center space-y-4">
-                  <h5 className="font-bold text-amber-300 text-sm">
+                <div className="lg:col-span-5 bg-[#02180d] p-6 sm:p-8 rounded-3xl border border-amber-500/30 text-center space-y-4 shadow-xl">
+                  <h5 className="font-black text-amber-300 text-base">
                     Ready to modernize Haji Raj Din Dairy?
                   </h5>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-300">
                     Get the Multi-Branch Website + Desktop POS bundled with complete staff training in Sahiwal.
                   </p>
                   <a
                     href={`https://wa.me/${dairyInfo.phoneRaw}?text=Salam!%20Mujhe%20Haji%20Raj%20Din%20Dairy%20k%20lye%20Multi-Branch%20Website%20aur%20Desktop%20POS%20ka%20live%20demo%20chahiye.`}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full btn-whatsapp text-xs sm:text-sm py-3 rounded-xl font-bold flex items-center justify-center gap-2"
+                    className="w-full btn-whatsapp-luxury text-xs sm:text-sm py-3.5 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg"
                   >
                     <span>Request POS Demo on WhatsApp</span>
                     <ArrowRight size={16} />
@@ -208,14 +208,14 @@ export function PosPitchSection() {
 
         {/* TAB 2: INTERACTIVE LIVE POS SIMULATOR */}
         {activeTab === 'simulator' && (
-          <div className="w-full bg-slate-950 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-10 border border-emerald-800 shadow-2xl">
-            <div className="flex flex-wrap items-center justify-between pb-4 mb-6 border-b border-slate-800 gap-4">
+          <div className="w-full bg-[#02180d] rounded-3xl p-5 sm:p-8 lg:p-10 border border-amber-500/30 shadow-2xl">
+            <div className="flex flex-wrap items-center justify-between pb-4 mb-6 border-b border-emerald-800/80 gap-4">
               <div>
-                <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">
+                <span className="text-[11px] font-black text-amber-400 uppercase tracking-widest block">
                   Simulated Desktop POS Screen
                 </span>
-                <h4 className="text-xl font-black text-white flex items-center gap-2">
-                  <Store size={20} className="text-emerald-400" />
+                <h4 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+                  <Store size={22} className="text-emerald-400" />
                   Haji Raj Din Dairy Counter Terminal v3.2
                 </h4>
               </div>
@@ -226,7 +226,7 @@ export function PosPitchSection() {
                 <select
                   value={selectedBranch}
                   onChange={(e) => setSelectedBranch(e.target.value)}
-                  className="bg-slate-900 text-white font-bold px-3 py-1.5 rounded-lg border border-slate-700 text-xs focus:ring-1 focus:ring-emerald-500"
+                  className="bg-[#031d10] text-amber-300 font-bold px-3 py-1.5 rounded-xl border border-amber-500/30 text-xs focus:ring-1 focus:ring-amber-500"
                 >
                   {branches.map(b => (
                     <option key={b.id} value={b.name}>{b.name}</option>
@@ -239,9 +239,9 @@ export function PosPitchSection() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
               
               {/* Buffalo Milk Chiller */}
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 relative">
+              <div className="bg-[#031d10] p-4 rounded-2xl border border-emerald-500/30 relative">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs text-slate-400">Buffalo Milk Chiller</span>
+                  <span className="text-xs text-slate-400 font-medium">Buffalo Milk Chiller</span>
                   <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2 py-0.5 rounded">
                     4°C Optimum
                   </span>
@@ -249,15 +249,15 @@ export function PosPitchSection() {
                 <div className="text-2xl font-black text-white">
                   {simulatedStock.buffaloMilk} <span className="text-xs text-slate-400 font-normal">Litres</span>
                 </div>
-                <div className="mt-2 text-[11px] text-amber-300 flex items-center gap-1">
-                  <Clock size={12} /> Morning Batch: 4h 15m remaining
+                <div className="mt-2 text-[11px] text-amber-300 font-semibold">
+                  ⏱️ Morning Batch: 4h 15m remaining
                 </div>
               </div>
 
               {/* Matka Dahi */}
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+              <div className="bg-[#031d10] p-4 rounded-2xl border border-emerald-500/30">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs text-slate-400">Thick Dahi Counter</span>
+                  <span className="text-xs text-slate-400 font-medium">Thick Dahi Counter</span>
                   <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-black px-2 py-0.5 rounded">
                     Fresh
                   </span>
@@ -265,15 +265,15 @@ export function PosPitchSection() {
                 <div className="text-2xl font-black text-white">
                   {simulatedStock.matkaDahi} <span className="text-xs text-slate-400 font-normal">Kg Available</span>
                 </div>
-                <div className="mt-2 text-[11px] text-emerald-400">
+                <div className="mt-2 text-[11px] text-emerald-400 font-semibold">
                   ✓ Fresh morning setting
                 </div>
               </div>
 
               {/* Sohan Halwa Trays */}
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+              <div className="bg-[#031d10] p-4 rounded-2xl border border-emerald-500/30">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs text-slate-400">Desi Ghee Halwajat</span>
+                  <span className="text-xs text-slate-400 font-medium">Desi Ghee Halwajat</span>
                   <span className="bg-amber-500/20 text-amber-400 text-[10px] font-black px-2 py-0.5 rounded">
                     Ghori St Kitchen
                   </span>
@@ -281,7 +281,7 @@ export function PosPitchSection() {
                 <div className="text-2xl font-black text-white">
                   {simulatedStock.sohanHalwa} <span className="text-xs text-slate-400 font-normal">Kg Gift Packs</span>
                 </div>
-                <div className="mt-2 text-[11px] text-slate-300">
+                <div className="mt-2 text-[11px] text-slate-300 font-semibold">
                   Ready for customer packaging
                 </div>
               </div>
@@ -292,9 +292,9 @@ export function PosPitchSection() {
             <div className="grid lg:grid-cols-12 gap-6">
               
               {/* Left: Quick Tap Sales Counter */}
-              <div className="lg:col-span-7 bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+              <div className="lg:col-span-7 bg-[#031d10] p-5 sm:p-6 rounded-2xl border border-emerald-500/30 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h5 className="font-bold text-white text-sm">
+                  <h5 className="font-black text-white text-sm">
                     Rush Hour Touch Billing (1-Click)
                   </h5>
                   <span className="text-xs text-slate-400">Simulate customer checkout</span>
@@ -307,19 +307,19 @@ export function PosPitchSection() {
                       onClick={() => setNewOrderLitre(ltr)}
                       className={`p-3 rounded-xl border font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all ${
                         newOrderLitre === ltr
-                          ? 'bg-emerald-600 text-white border-emerald-500'
-                          : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-750'
+                          ? 'btn-gold-luxury border-amber-400 shadow-md'
+                          : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10'
                       }`}
                     >
                       <span className="text-base font-black">{ltr} Litre</span>
-                      <span className="text-[10px] opacity-75">Rs. {ltr * 240}</span>
+                      <span className="text-[10px] opacity-80">Rs. {ltr * 240}</span>
                     </button>
                   ))}
                 </div>
 
-                <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between">
+                <div className="p-3.5 bg-[#02180d] rounded-xl border border-emerald-500/30 flex items-center justify-between">
                   <div>
-                    <span className="text-xs text-slate-400 block">Pending Counter Order:</span>
+                    <span className="text-xs text-slate-400 block font-medium">Pending Counter Order:</span>
                     <span className="text-sm font-black text-amber-300">
                       {newOrderLitre} Litre Buffalo Milk = Rs. {newOrderLitre * 240}
                     </span>
@@ -327,37 +327,37 @@ export function PosPitchSection() {
 
                   <button
                     onClick={handleSimulatedSale}
-                    className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 shadow-md transition-all active:scale-95"
+                    className="btn-gold-luxury text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition-all"
                   >
-                    <Printer size={14} /> Punch Bill & Print
+                    <Printer size={15} /> Punch Bill & Print
                   </button>
                 </div>
               </div>
 
               {/* Right: Thermal Receipt Output */}
-              <div className="lg:col-span-5 bg-white text-slate-900 p-4 rounded-xl shadow-inner font-mono text-xs space-y-2">
-                <div className="text-center border-b border-dashed border-slate-300 pb-2">
-                  <div className="font-black text-sm">HAJI RAJ DIN DAIRY MILK</div>
-                  <div className="text-[10px] text-slate-500">{selectedBranch}</div>
-                  <div className="text-[10px] text-slate-500">HOTLINE: 0300-2743860</div>
+              <div className="lg:col-span-5 bg-white text-slate-900 p-4 sm:p-5 rounded-2xl shadow-xl font-mono text-xs space-y-2 border border-slate-200">
+                <div className="text-center border-b border-dashed border-slate-400 pb-2">
+                  <div className="font-black text-sm tracking-tight">HAJI RAJ DIN DAIRY MILK</div>
+                  <div className="text-[10px] text-slate-600 font-bold">{selectedBranch}</div>
+                  <div className="text-[10px] text-slate-600">HOTLINE: 0300-2743860</div>
                 </div>
 
-                <div className="space-y-1 py-1 border-b border-dashed border-slate-300">
-                  <div className="flex justify-between font-bold">
+                <div className="space-y-1.5 py-2 border-b border-dashed border-slate-400">
+                  <div className="flex justify-between font-bold text-slate-900">
                     <span>Recent Sales:</span>
                     <span>PKR</span>
                   </div>
                   {recentBills.map(b => (
-                    <div key={b.id} className="flex justify-between text-[11px]">
+                    <div key={b.id} className="flex justify-between text-[11px] text-slate-700">
                       <span>{b.items}</span>
-                      <span>Rs. {b.total}</span>
+                      <span className="font-bold">Rs. {b.total}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-1 text-center text-[10px] text-slate-400">
+                <div className="pt-2 text-center text-[10px] text-slate-500 font-semibold">
                   *** THANK YOU FOR VISITING ***<br />
-                  Pure Milk & Sweet Traditions
+                  Pure Milk & Sweet Traditions Sahiwal
                 </div>
               </div>
 
@@ -370,13 +370,3 @@ export function PosPitchSection() {
     </section>
   );
 }
-
-function Clock({ size, className }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size || 16} height={size || 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12 6 12 12 16 14"/>
-    </svg>
-  );
-}
-

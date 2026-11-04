@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { dairyInfo, branches } from '../data/dairyData';
-import { MessageCircle, ShoppingBag, Trash2, Plus, Minus, CheckCircle, MapPin, Calculator, Sparkles } from 'lucide-react';
+import { MessageCircle, ShoppingBag, Plus, Minus, MapPin, Calculator, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const defaultItems = [
   { id: 'milk', name: 'Fresh Buffalo Milk (خالص بھینس کا دودھ)', unit: 'Litre', price: 240, qty: 2 },
@@ -11,7 +11,7 @@ const defaultItems = [
   { id: 'ghee', name: 'Pure Desi Ghee Jar (خالص دیسی گھی)', unit: 'Kg', price: 2400, qty: 0 },
 ];
 
-export function OrderCalculator({ cartItems, onUpdateCart }) {
+export function OrderCalculator() {
   const [items, setItems] = useState(defaultItems);
   const [selectedBranch, setSelectedBranch] = useState(branches[0].name);
   const [orderType, setOrderType] = useState('Home Delivery in Sahiwal');
@@ -60,71 +60,75 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
   };
 
   return (
-    <section id="calculator" className="py-16 bg-white border-t border-slate-200">
+    <section id="calculator" className="py-16 sm:py-20 bg-white border-t border-slate-200/80 relative">
       <div className="container">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">
-            <Calculator size={14} className="text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-300 mb-3 shadow-2xs">
+            <Calculator size={14} className="text-emerald-700" />
             Fast WhatsApp Order Assistant
           </div>
-          <h2 className="urdu-font text-3xl sm:text-4xl font-black text-emerald-950 mb-2">
+          <h2 className="urdu-font text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-950 mb-2 leading-relaxed">
             آن لائن واٹس ایپ آرڈر اور بل کیلکولیٹر
           </h2>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Build Your Fresh Dairy Order in Seconds
+          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Build Your Fresh Dairy Basket in Seconds
           </h3>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
             Select your preferred branch in Sahiwal, adjust your required quantities, and send your order directly to our official WhatsApp (<strong>0300-2743860</strong>).
           </p>
         </div>
 
-        <div className="w-full bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 border border-slate-200 shadow-xl">
+        <div className="w-full bg-[#fbf9f3] rounded-3xl p-5 sm:p-8 lg:p-12 border border-slate-200/90 shadow-xl">
           <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
             
             {/* Left: Item Selectors */}
             <div className="lg:col-span-7 xl:col-span-8 space-y-4">
-              <h4 className="font-black text-slate-900 text-base sm:text-lg flex items-center justify-between">
-                <span>Select Products & Quantities</span>
-                <span className="text-xs text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full font-bold">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200/80">
+                <h4 className="font-black text-slate-900 text-base sm:text-xl">
+                  Select Products & Quantities
+                </h4>
+                <span className="text-xs text-emerald-900 bg-emerald-100 px-3 py-1 rounded-full font-black border border-emerald-300">
                   {totalItemsCount} items selected
                 </span>
-              </h4>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className={`p-3.5 rounded-2xl border transition-all flex items-center justify-between ${
+                    className={`p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between ${
                       item.qty > 0 
-                        ? 'bg-white border-emerald-500 shadow-sm' 
-                        : 'bg-white/60 border-slate-200'
+                        ? 'bg-white border-amber-500/80 shadow-md ring-1 ring-amber-400/30' 
+                        : 'bg-white/70 border-slate-200 hover:bg-white'
                     }`}
                   >
-                    <div className="space-y-0.5 pr-2">
-                      <h5 className="font-bold text-slate-900 text-sm">{item.name}</h5>
-                      <p className="text-xs text-slate-500">
+                    <div className="space-y-1 pr-2">
+                      <h5 className="font-extrabold text-slate-900 text-xs sm:text-sm leading-snug">
+                        {item.name}
+                      </h5>
+                      <p className="text-xs text-emerald-800 font-bold">
                         Rs. {item.price.toLocaleString()} / {item.unit}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                       <button
                         onClick={() => updateQty(item.id, -1)}
-                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm transition-colors"
+                        className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-sm transition-colors"
                         disabled={item.qty === 0}
                       >
                         <Minus size={14} />
                       </button>
 
-                      <span className="w-8 text-center font-black text-slate-900 text-sm">
+                      <span className="w-7 text-center font-black text-slate-900 text-sm">
                         {item.qty}
                       </span>
 
                       <button
                         onClick={() => updateQty(item.id, 1)}
-                        className="w-8 h-8 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center font-bold text-sm transition-colors"
+                        className="w-8 h-8 rounded-xl bg-[#063821] hover:bg-[#031d10] text-amber-300 flex items-center justify-center font-bold text-sm transition-colors shadow-2xs"
                       >
                         <Plus size={14} />
                       </button>
@@ -134,23 +138,23 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
               </div>
             </div>
 
-            {/* Right: Branch & Delivery Details */}
-            <div className="lg:col-span-5 xl:col-span-4 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            {/* Right: Branch & Delivery Details Box */}
+            <div className="lg:col-span-5 xl:col-span-4 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-lg space-y-4 flex flex-col justify-between">
               
               <div className="space-y-4">
-                <h4 className="font-black text-slate-900 text-base border-b border-slate-100 pb-2">
-                  Order & Branch Details
+                <h4 className="font-black text-slate-900 text-lg border-b border-slate-100 pb-2 flex items-center gap-2">
+                  <span>Branch & Checkout</span>
                 </h4>
 
                 {/* Choose Branch */}
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                  <label className="text-xs font-black text-slate-700 block mb-1.5">
                     Select Sahiwal Branch:
                   </label>
                   <select
                     value={selectedBranch}
                     onChange={(e) => setSelectedBranch(e.target.value)}
-                    className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-300 bg-slate-50 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full text-xs font-bold p-3 rounded-xl border border-slate-300 bg-slate-50 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   >
                     {branches.map(b => (
                       <option key={b.id} value={b.name}>
@@ -160,9 +164,9 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
                   </select>
                 </div>
 
-                {/* Order Type */}
+                {/* Order Preference */}
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                  <label className="text-xs font-black text-slate-700 block mb-1.5">
                     Order Preference:
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -171,10 +175,10 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
                         key={t}
                         type="button"
                         onClick={() => setOrderType(t)}
-                        className={`p-2 rounded-xl text-xs font-bold text-center border transition-all ${
+                        className={`p-2.5 rounded-xl text-xs font-black text-center border transition-all ${
                           orderType === t
-                            ? 'bg-emerald-800 text-white border-emerald-800'
-                            : 'bg-slate-50 text-slate-700 border-slate-200'
+                            ? 'bg-[#063821] text-amber-300 border-[#063821] shadow-sm'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                         }`}
                       >
                         {t}
@@ -184,13 +188,13 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
                 </div>
 
                 {/* Customer Details */}
-                <div className="space-y-2 pt-1">
+                <div className="space-y-2.5 pt-1">
                   <input
                     type="text"
                     placeholder="Your Name (آپ کا نام)"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full text-xs font-medium p-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   />
 
                   {orderType.includes('Delivery') && (
@@ -199,25 +203,25 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
                       placeholder="Delivery Address (مثال: فرید ٹاؤن، ساہیوال)"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                      className="w-full text-xs font-medium p-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                     />
                   )}
 
                   <input
                     type="text"
-                    placeholder="Instructions (e.g. Garam Doodh, Kam Meetha)"
+                    placeholder="Special Instructions (e.g. Garam Doodh, Kam Meetha)"
                     value={specialNote}
                     onChange={(e) => setSpecialNote(e.target.value)}
-                    className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                    className="w-full text-xs font-medium p-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-amber-500 focus:outline-none"
                   />
                 </div>
               </div>
 
               {/* Total Calculation & Send Order Button */}
-              <div className="pt-4 border-t border-slate-200 space-y-3">
+              <div className="pt-4 border-t border-slate-100 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-500 text-xs font-semibold">Estimated Total:</span>
-                  <span className="text-2xl font-black text-emerald-950">
+                  <span className="text-slate-500 text-xs font-bold uppercase tracking-wider">Estimated Total:</span>
+                  <span className="text-2xl sm:text-3xl font-black text-emerald-950">
                     Rs. {totalAmount.toLocaleString()}
                   </span>
                 </div>
@@ -226,18 +230,18 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
                   href={generateWhatsAppMessage()}
                   target="_blank"
                   rel="noreferrer"
-                  className={`w-full py-3.5 px-4 rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all ${
+                  className={`w-full py-3.5 px-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 shadow-xl transition-all ${
                     totalAmount > 0
-                      ? 'btn-whatsapp'
-                      : 'bg-slate-300 text-slate-500 pointer-events-none'
+                      ? 'btn-whatsapp-luxury cursor-pointer'
+                      : 'bg-slate-200 text-slate-400 pointer-events-none'
                   }`}
                 >
-                  <MessageCircle size={18} />
-                  <span>Send Order to WhatsApp (0300 2743860)</span>
+                  <MessageCircle size={19} />
+                  <span>Send Order to 0300-2743860</span>
                 </a>
 
-                <p className="text-[11px] text-center text-slate-400">
-                  Instant response from Haji Raj Din Dairy team during 06:00 AM - 11:30 PM.
+                <p className="text-[11px] text-center text-slate-400 font-medium">
+                  Instant confirmation from Haji Raj Din team (6:00 AM - 11:30 PM).
                 </p>
               </div>
 
@@ -250,4 +254,3 @@ export function OrderCalculator({ cartItems, onUpdateCart }) {
     </section>
   );
 }
-
