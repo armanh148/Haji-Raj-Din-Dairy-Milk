@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { branches, dairyInfo } from '../data/dairyData';
-import { MapPin, Navigation, Phone, MessageCircle, Clock, CheckCircle2, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Navigation, Phone, MessageCircle, Clock, CheckCircle2, Building2, ChevronLeft, ChevronRight, Store, Sparkles } from 'lucide-react';
 
 export function BranchLocations() {
   const [selectedBranchId, setSelectedBranchId] = useState(branches[0].id);
@@ -118,12 +118,12 @@ export function BranchLocations() {
                     <span>{currentMobileBranch.address}</span>
                   </p>
 
-                  {/* Key Features */}
-                  <div className="space-y-2 mb-6 pt-3.5 border-t border-slate-100">
+                  {/* Key Features (2-per-row grid on mobile) */}
+                  <div className="grid grid-cols-2 gap-2 mb-5 pt-3.5 border-t border-slate-100">
                     {currentMobileBranch.features.map((feat, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-slate-600">
-                        <CheckCircle2 size={14} className="text-emerald-600 flex-shrink-0" />
-                        <span>{feat}</span>
+                      <div key={i} className="flex items-center gap-1.5 text-[11px] text-slate-700 bg-slate-50 border border-slate-100 p-1.5 rounded-lg">
+                        <CheckCircle2 size={13} className="text-emerald-600 flex-shrink-0" />
+                        <span className="truncate">{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -296,64 +296,90 @@ export function BranchLocations() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.35 }}
-            className="bg-gradient-to-br from-[#031d10] via-[#063821] to-[#02180d] text-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-amber-500/30"
+            className="relative overflow-hidden bg-gradient-to-br from-[#062c1a] via-[#041f12] to-[#02140b] text-white rounded-3xl p-5 sm:p-7 lg:p-9 shadow-2xl border-2 border-amber-400/35"
           >
-            <div className="grid lg:grid-cols-12 gap-6 items-center">
+            {/* Ambient luxury glows */}
+            <div className="absolute -top-16 -right-16 w-52 h-52 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-16 -left-16 w-52 h-52 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 grid lg:grid-cols-12 gap-6 items-center">
               
               <div className="lg:col-span-8 space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="btn-gold-luxury text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                    Active Outlet Focus
-                  </span>
-                  <span className="text-emerald-200 text-xs font-semibold">
-                    {selectedBranch.badge}
-                  </span>
+                {/* Header Badge & Timings */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-emerald-800/60">
+                  <div className="flex items-center gap-2">
+                    <span className="btn-gold-luxury text-slate-950 text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-xs">
+                      <Store size={13} className="text-slate-950" />
+                      Active Outlet Focus
+                    </span>
+                    <span className="text-[11px] font-bold text-amber-300 bg-white/5 border border-amber-400/25 px-2.5 py-0.5 rounded-full">
+                      {selectedBranch.badge}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 text-xs text-emerald-300 font-semibold">
+                    <Clock size={12} className="text-amber-400" />
+                    <span>Open Daily: {selectedBranch.timings}</span>
+                  </div>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-white">
+                {/* Branch Names */}
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight">
                   {selectedBranch.name}
                 </h3>
-                <p className="urdu-font text-lg text-amber-300 font-bold">
+                <p className="urdu-font text-base sm:text-xl text-amber-300 font-bold block my-1">
                   {selectedBranch.urduName}
                 </p>
 
-                <p className="text-slate-300 text-xs sm:text-sm">
-                  {selectedBranch.address} — Open daily: <strong>{selectedBranch.timings}</strong>
-                </p>
+                {/* Address Bar */}
+                <div className="flex items-start gap-2 bg-white/5 border border-white/10 rounded-xl p-2.5 sm:p-3 text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+                  <MapPin size={16} className="text-amber-400 shrink-0 mt-0.5" />
+                  <span>{selectedBranch.address}</span>
+                </div>
 
-                <div className="pt-2 flex flex-wrap gap-2 text-xs">
+                {/* Key Features (Clean 2-Column Grid) */}
+                <div className="grid grid-cols-2 gap-2 pt-1">
                   {selectedBranch.features.map((f, i) => (
-                    <span key={i} className="bg-white/10 px-3 py-1 rounded-full text-slate-200 border border-white/10">
-                      ✓ {f}
-                    </span>
+                    <div 
+                      key={i} 
+                      className="flex items-center gap-1.5 sm:gap-2 bg-emerald-950/70 border border-emerald-500/25 px-2.5 py-2 rounded-xl text-[11px] sm:text-xs text-emerald-100 font-medium shadow-2xs"
+                    >
+                      <CheckCircle2 size={13} className="text-amber-400 shrink-0" />
+                      <span className="truncate">{f}</span>
+                    </div>
                   ))}
                 </div>
               </div>
 
-              <div className="lg:col-span-4 flex flex-col gap-3">
+              {/* Action Buttons Column */}
+              <div className="lg:col-span-4 flex flex-col gap-2.5 sm:gap-3 pt-2 lg:pt-0">
                 <motion.a
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.96 }}
                   href={selectedBranch.mapLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-gold-luxury text-xs py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-center shadow-lg"
+                  className="btn-gold-luxury text-xs sm:text-sm font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-center shadow-lg"
                 >
-                  <Navigation size={16} />
+                  <Navigation size={15} />
                   <span>Open Route in Map</span>
                 </motion.a>
 
                 <motion.a
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.96 }}
                   href={`https://wa.me/${dairyInfo.phoneRaw}?text=Salam!%20${encodeURIComponent(selectedBranch.name)}%20ki%20timing%20aur%20rates%20maloom%20karne%20hain.`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-whatsapp-luxury font-bold text-xs py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-center shadow-lg"
+                  className="btn-whatsapp-luxury font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-center shadow-lg"
                 >
-                  <MessageCircle size={16} />
+                  <MessageCircle size={15} />
                   <span>Chat on WhatsApp</span>
                 </motion.a>
+
+                <p className="text-[11px] text-center text-emerald-200/70 mt-1">
+                  Direct helpline: <strong>{dairyInfo.phone}</strong>
+                </p>
               </div>
 
             </div>
