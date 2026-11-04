@@ -43,12 +43,12 @@ export function PosPitchSection() {
       <div className="container relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-4xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 mb-3 shadow-md">
             <Sparkles size={14} className="fill-slate-950" />
             Special Pitch for Haji Raj Din Management
           </div>
-          <h2 className="urdu-font text-3xl sm:text-4xl lg:text-5xl font-black text-amber-300 mb-2 leading-relaxed">
+          <h2 className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-amber-300 mb-2 leading-relaxed whitespace-nowrap overflow-x-auto scrollbar-none py-1">
             ملٹی برانچ ویب سائٹ اور ڈیسک ٹاپ سٹاک ایکسپائری پی او ایس سسٹم
           </h2>
           <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
