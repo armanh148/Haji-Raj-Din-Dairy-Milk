@@ -83,12 +83,12 @@ export function Navbar({ cartCount, onOpenCart }) {
               )}
             </button>
 
-            {/* Dark Agrovia Pill Button */}
+            {/* Dark Agrovia Pill Button - Hidden on mobile/tablet, visible on desktop */}
             <a
               href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Haji%20Raj%20Din%20Dairy%20Sahiwal%20se%20order%20karna%20chahta%20hoon.`}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5"
+              className="hidden lg:inline-flex btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5"
             >
               <MessageCircle size={15} />
               <span>Order Now</span>
@@ -98,6 +98,7 @@ export function Navbar({ cartCount, onOpenCart }) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-xl text-slate-800 hover:bg-slate-100"
+              aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -111,25 +112,35 @@ export function Navbar({ cartCount, onOpenCart }) {
             <a href="#hero" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">Home</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">Our Farm & Heritage</a>
             <a href="#products" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">Pure Dairy Products</a>
-            <a href="#branches" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">3 Sahiwal Branches (Madhali Rd, Ghori St, Gujar Ahata)</a>
+            <a href="#branches" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">3 Sahiwal Branches</a>
             <a href="#celebrity" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">Client Reviews & Ramzan Jani Video</a>
             <a href="#pos-pitch" onClick={() => setMobileMenuOpen(false)} className="p-2 hover:bg-slate-50 rounded-lg">Multi-Branch POS Tech</a>
             
-            <div className="pt-2 flex gap-2">
+            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+              {/* Order Now button prominently inside mobile nav menu */}
               <a 
-                href={`tel:${dairyInfo.phoneRaw}`} 
-                className="flex-1 py-2.5 rounded-full bg-slate-100 text-slate-900 font-bold text-xs text-center flex items-center justify-center gap-1.5"
-              >
-                <Phone size={14} /> Call 0300-2743860
-              </a>
-              <a 
-                href={`https://wa.me/${dairyInfo.phoneRaw}`} 
+                href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Haji%20Raj%20Din%20Dairy%20Sahiwal%20se%20order%20karna%20chahta%20hoon.`} 
                 target="_blank" 
                 rel="noreferrer"
-                className="flex-1 py-2.5 rounded-full bg-[#0b1e14] text-white font-bold text-xs text-center flex items-center justify-center gap-1.5"
+                className="w-full py-3 rounded-full btn-agrovia-dark text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-md"
               >
-                <MessageCircle size={14} /> WhatsApp
+                <MessageCircle size={16} /> Order Now on WhatsApp
               </a>
+
+              <div className="flex gap-2">
+                <a 
+                  href={`tel:${dairyInfo.phoneRaw}`} 
+                  className="flex-1 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Phone size={14} /> Call 0300-2743860
+                </a>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); onOpenCart(); }}
+                  className="flex-1 py-2.5 rounded-full bg-emerald-50 text-emerald-900 font-bold text-xs text-center flex items-center justify-center gap-1.5 border border-emerald-200"
+                >
+                  <ShoppingCart size={14} /> View Cart ({cartCount})
+                </button>
+              </div>
             </div>
           </div>
         )}
