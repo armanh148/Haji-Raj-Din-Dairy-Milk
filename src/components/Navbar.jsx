@@ -83,16 +83,18 @@ export function Navbar({ cartCount, onOpenCart }) {
               )}
             </button>
 
-            {/* Dark Agrovia Pill Button - Hidden on mobile/tablet, visible on desktop */}
-            <a
-              href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Haji%20Raj%20Din%20Dairy%20Sahiwal%20se%20order%20karna%20chahta%20hoon.`}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden lg:inline-flex btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5"
-            >
-              <MessageCircle size={15} />
-              <span>Order Now</span>
-            </a>
+            {/* Desktop Order Now Button - Strictly hidden on mobile and tablet */}
+            <div className="hidden lg:block">
+              <a
+                href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Haji%20Raj%20Din%20Dairy%20Sahiwal%20se%20order%20karna%20chahta%20hoon.`}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-agrovia-dark text-xs uppercase tracking-wider px-5 py-2.5"
+              >
+                <MessageCircle size={15} />
+                <span>Order Now</span>
+              </a>
+            </div>
 
             {/* Mobile Hamburger Toggle */}
             <button
