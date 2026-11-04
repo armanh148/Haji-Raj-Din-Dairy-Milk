@@ -130,7 +130,7 @@ export const products = [
     price: 1100,
     tag: "Seasonal Favorite",
     description: "Fresh red carrots grated and simmered in full cream milk and pure desi ghee, topped with rich homemade khoya.",
-    image: "https://images.unsplash.com/photo-1505253758473-96b3015f210f?auto=format&fit=crop&w=700&q=80",
+    image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=700&q=80",
     fat: "Pure Ghee & Khoya",
     freshness: "Warm & Fresh"
   },

@@ -69,16 +69,16 @@ export function OrderCalculator() {
             <Calculator size={14} className="text-emerald-700" />
             Fast WhatsApp Order Assistant
           </div>
-          <h2 
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+            Build Your Fresh Dairy Basket in Seconds
+          </h2>
+          <p 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
+            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 my-2 py-1 block w-full text-center"
           >
             آن لائن واٹس ایپ آرڈر اور بل کیلکولیٹر
-          </h2>
-          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Build Your Fresh Dairy Basket in Seconds
-          </h3>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
+          </p>
+          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
             Select your preferred branch in Sahiwal, adjust your required quantities, and send your order directly to our official WhatsApp (<strong>0300-2743860</strong>).
           </p>
         </div>

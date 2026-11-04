@@ -21,16 +21,16 @@ export function BranchAnnouncement() {
                 Grand Opening in Sahiwal!
               </div>
 
-              <h3 
-                style={{ whiteSpace: 'nowrap' }} 
-                className="urdu-font text-base sm:text-xl md:text-2xl font-black text-emerald-950 leading-relaxed overflow-visible py-2 block"
-              >
-                مبارک ہو ساہیوال! حاجی راج دین ڈیری کی تیسری برانچ کا شاندار افتتاح
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                Now Serving You at <span className="text-emerald-800 underline decoration-amber-500 underline-offset-4">Madhali Road Outlet</span>
               </h3>
 
-              <h4 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Now Serving You at <span className="text-emerald-800 underline decoration-amber-500 underline-offset-4">Madhali Road Outlet</span>
-              </h4>
+              <p 
+                style={{ whiteSpace: 'nowrap' }} 
+                className="urdu-font text-base sm:text-xl md:text-2xl font-black text-emerald-950 my-2 py-1 block overflow-visible"
+              >
+                مبارک ہو ساہیوال! حاجی راج دین ڈیری کی تیسری برانچ کا شاندار افتتاح
+              </p>
 
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
                 To serve families across Sahiwal with pure farm-fresh dairy convenience, Haji Raj Din Dairy Milk has launched its 3rd branch on 

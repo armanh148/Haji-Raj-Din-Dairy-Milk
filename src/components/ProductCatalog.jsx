@@ -65,7 +65,7 @@ export function ProductCatalog({ onAddToCart }) {
           </h2>
           <p 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 block w-full text-center py-2 overflow-visible"
+            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 block w-full text-center my-2 py-1 overflow-visible"
           >
             خالص دودھ، تازہ دہی اور لذیذ دیسی گھی سوغاتیں
           </p>

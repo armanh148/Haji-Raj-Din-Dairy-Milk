@@ -17,16 +17,16 @@ export function BranchLocations() {
             <Building2 size={14} className="text-emerald-700" />
             3 Convenient Locations in Sahiwal 57000
           </div>
-          <h2 
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+            Find Your Nearest Haji Raj Din Dairy Outlet
+          </h2>
+          <p 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
+            className="urdu-font text-base sm:text-xl md:text-2xl lg:text-3xl font-black text-emerald-950 my-2 py-1 block w-full text-center"
           >
             ساہیوال میں ہماری ۳ برانچز پر تشریف لائیں
-          </h2>
-          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Find Your Nearest Haji Raj Din Dairy Outlet
-          </h3>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
+          </p>
+          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
             Fresh morning & evening buffalo milk collection, traditional dahi, desi ghee sweets, and dairy ice cream available across all three branches.
           </p>
         </div>

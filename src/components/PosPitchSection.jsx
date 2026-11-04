@@ -48,15 +48,15 @@ export function PosPitchSection() {
             <Sparkles size={14} className="fill-slate-950" />
             Special Pitch for Haji Raj Din Management
           </div>
-          <h2 
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
+            Scale Haji Raj Din Dairy with Modern Multi-Branch Tech
+          </h2>
+          <p 
             style={{ whiteSpace: 'nowrap' }} 
-            className="urdu-font text-xs sm:text-base md:text-xl lg:text-2xl font-black text-amber-300 mb-2 leading-relaxed overflow-visible py-2 block w-full text-center"
+            className="urdu-font text-xs sm:text-base md:text-xl lg:text-2xl font-black text-amber-300 my-2 py-1 block w-full text-center"
           >
             ملٹی برانچ ویب سائٹ اور ڈیسک ٹاپ سٹاک ایکسپائری پی او ایس سسٹم
-          </h2>
-          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Scale Haji Raj Din Dairy with Modern Multi-Branch Tech
-          </h3>
+          </p>
           <p className="text-slate-300 text-sm sm:text-base mt-2">
             You are spending on paid Facebook video ads and expanding to 3 Sahiwal branches. 
             Now unlock <strong>100% stock control</strong>, prevent milk spoilage, and streamline morning/evening rush billing with a dedicated Desktop POS.
