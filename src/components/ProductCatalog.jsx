@@ -1,23 +1,46 @@
 import React, { useState } from 'react';
-import { products } from '../data/dairyData';
-import { Check, Plus, Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
+import { products, dairyInfo } from '../data/dairyData';
+import { Check, Plus, ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
 
-const categories = [
-  { id: 'all', name: 'All Specialties', urdu: 'تمام مصنوعات' },
-  { id: 'fresh-milk', name: 'Fresh Milk & Butter', urdu: 'تازہ دودھ و مکھن' },
-  { id: 'yogurt', name: 'Rich Dahi', urdu: 'گاڑھا دہی' },
-  { id: 'halwajat', name: 'Pure Desi Ghee Halwajat', urdu: 'دیسی گھی حلوہ جات' },
-  { id: 'kheer-rabri', name: 'Khoya Kheer & Rabri', urdu: 'کھویا کھیر و ربڑی' },
-  { id: 'icecream', name: 'Dairy Kulfa & Ice Cream', urdu: 'ڈیری آئس کریم و قلفہ' },
+const categoryTabs = [
+  { 
+    id: 'fresh-milk', 
+    name: 'Fresh Milk & Butter', 
+    urdu: 'تازہ دودھ و مکھن',
+    featuredProduct: products.find(p => p.id === 'milk-buffalo'),
+  },
+  { 
+    id: 'yogurt', 
+    name: 'Traditional Thick Dahi', 
+    urdu: 'گاڑھا ملائی دار دہی',
+    featuredProduct: products.find(p => p.id === 'thick-dahi'),
+  },
+  { 
+    id: 'halwajat', 
+    name: 'Pure Desi Ghee Halwajat', 
+    urdu: 'دیسی گھی سوہن حلوہ',
+    featuredProduct: products.find(p => p.id === 'desi-ghee-sohan'),
+  },
+  { 
+    id: 'kheer-rabri', 
+    name: 'Khoya Kheer & Rabri', 
+    urdu: 'شاہی کھویا کھیر و ربڑی',
+    featuredProduct: products.find(p => p.id === 'khoya-kheer'),
+  },
+  { 
+    id: 'icecream', 
+    name: 'Dairy Kulfa & Ice Cream', 
+    urdu: 'شاہی ڈیری قلفہ',
+    featuredProduct: products.find(p => p.id === 'dairy-kulfa'),
+  },
 ];
 
 export function ProductCatalog({ onAddToCart }) {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeTabId, setActiveTabId] = useState('fresh-milk');
   const [addedIds, setAddedIds] = useState({});
 
-  const filteredProducts = activeCategory === 'all'
-    ? products
-    : products.filter(p => p.category === activeCategory);
+  const activeTab = categoryTabs.find(t => t.id === activeTabId) || categoryTabs[0];
+  const featured = activeTab.featuredProduct;
 
   const handleAdd = (product) => {
     onAddToCart(product);
@@ -28,160 +51,205 @@ export function ProductCatalog({ onAddToCart }) {
   };
 
   return (
-    <section id="products" className="py-16 sm:py-20 bg-[#faf8f2] relative">
+    <section id="products" className="py-16 sm:py-24 bg-white border-t border-slate-100">
       <div className="container">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100/80 text-emerald-900 border border-emerald-300/60 mb-3 shadow-2xs">
-            <Sparkles size={13} className="text-emerald-700" />
-            100% Pure Sahiwal Dairy Tradition
+        {/* Section Header Matching Agrovia Layout */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200 mb-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
+            Our Pure Range
           </div>
-          <h2 className="urdu-font text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-950 mb-2 leading-relaxed">
-            خالص دودھ، تازہ دہی اور لذیذ دیسی گھی سوغاتیں
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0a192f] tracking-tight">
+            Fresh & Pure Dairy Specialties
           </h2>
-          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Artisanal Dairy Products & Royal Confectionery
-          </h3>
-          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
-            Directly from our farm chillers to our 3 Sahiwal branches: <strong>Madhali Rd</strong>, <strong>Ghori St</strong> & <strong>Gujar Ahata</strong>. 
-            Prepared daily without chemical thickeners or synthetic fats.
+          <p className="text-slate-500 text-sm sm:text-base mt-2">
+            Crafted daily with unadulterated milk and authentic desi ghee.
           </p>
         </div>
 
-        {/* Categories Bar - Responsive Horizontal Touch Scroll with Luxury Pills */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-8 -mx-2 px-2 sm:mx-0 sm:px-0 scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2.5 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 shadow-2xs ${
-                activeCategory === cat.id
-                  ? 'bg-gradient-to-r from-[#063821] to-[#042414] text-amber-300 border border-amber-500/50 shadow-md shadow-emerald-950/20'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'
-              }`}
-            >
-              <span>{cat.name}</span>
-              <span className="text-xs opacity-75 urdu-font hidden md:inline">({cat.urdu})</span>
-            </button>
-          ))}
+        {/* 3-Column Spotlight Showcase (Exact Agrovia Layout) */}
+        <div className="bg-[#faf9f6] rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200/80 mb-16 shadow-sm">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Left Column: Interactive Vertical Category List */}
+            <div className="lg:col-span-4 space-y-2">
+              <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block mb-3">
+                Select Category
+              </span>
+
+              {categoryTabs.map((cat) => {
+                const isActive = cat.id === activeTabId;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveTabId(cat.id)}
+                    className={`w-full text-left p-3.5 rounded-2xl font-black text-sm sm:text-base transition-all flex items-center justify-between ${
+                      isActive
+                        ? 'bg-[#0b1e14] text-white shadow-md'
+                        : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80'
+                    }`}
+                  >
+                    <div>
+                      <span>{cat.name}</span>
+                      <span className={`block text-xs font-bold urdu-font mt-0.5 ${isActive ? 'text-emerald-300' : 'text-slate-400'}`}>
+                        {cat.urdu}
+                      </span>
+                    </div>
+                    {isActive && <ArrowRight size={18} className="text-emerald-400" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Center Column: Big Focal Showcase Image */}
+            <div className="lg:col-span-4">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-square bg-slate-100 border border-white">
+                <img
+                  src={featured.image}
+                  alt={featured.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-3 left-3 bg-white/95 text-slate-900 text-xs font-black px-3 py-1 rounded-full shadow-md">
+                  {featured.tag}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Narrative Details & Direct WhatsApp CTA */}
+            <div className="lg:col-span-4 space-y-5">
+              <div>
+                <span className="text-xs font-black uppercase tracking-wider text-emerald-800">
+                  Featured Product
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-[#0a192f] mt-1 leading-tight">
+                  {featured.name}
+                </h3>
+                <p className="urdu-font text-lg text-emerald-900 font-bold">
+                  {featured.urduName}
+                </p>
+              </div>
+
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {featured.description}
+              </p>
+
+              <div className="pt-2 flex items-baseline gap-2">
+                <span className="text-3xl font-black text-[#0a192f]">
+                  Rs. {featured.price.toLocaleString()}
+                </span>
+                <span className="text-xs font-bold text-slate-400">{featured.unit}</span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <a
+                  href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20Mujhe%20${encodeURIComponent(featured.name)}%20ka%20order%20karna%20hai.`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-agrovia-dark text-xs uppercase tracking-wider px-6 py-3.5 text-center"
+                >
+                  <MessageCircle size={15} />
+                  <span>Order on WhatsApp</span>
+                </a>
+
+                <button
+                  onClick={() => handleAdd(featured)}
+                  className="bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-bold text-xs uppercase px-5 py-3.5 rounded-full transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Plus size={15} />
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        {/* Product Cards Grid - 2 Per Row on Mobile, Responsive Multi-Column on Wider Screens */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-5 lg:gap-6">
-          {filteredProducts.map((p) => {
-            const isJustAdded = addedIds[p.id];
+        {/* 2-Per-Row Responsive Mobile & Desktop Catalog Grid */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h4 className="text-xl sm:text-2xl font-black text-[#0a192f]">
+              Full Sahiwal Dairy Menu
+            </h4>
+            <span className="text-xs font-bold text-slate-500">
+              Showing all 12 fresh specialties
+            </span>
+          </div>
 
-            return (
-              <div 
-                key={p.id}
-                className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-              >
-                <div>
-                  {/* Product Image with Gradient Vignette */}
-                  <div className="relative h-32 sm:h-40 md:h-48 overflow-hidden bg-slate-100">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+            {products.map((p) => {
+              const isJustAdded = addedIds[p.id];
 
-                    {/* Tag Top Left */}
-                    <div className="absolute top-2 left-2">
-                      <span className="bg-[#031d10]/90 text-amber-300 text-[9px] sm:text-[11px] font-black px-2 py-0.5 sm:py-1 rounded-lg backdrop-blur-md shadow-sm border border-amber-400/30">
-                        {p.tag}
+              return (
+                <div 
+                  key={p.id}
+                  className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 hover:border-emerald-500 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Image */}
+                    <div className="relative h-32 sm:h-44 md:h-48 overflow-hidden bg-slate-100">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-2 left-2">
+                        <span className="bg-[#0b1e14]/90 text-white text-[9px] sm:text-[10px] font-black px-2 py-0.5 rounded-md">
+                          {p.tag}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Details */}
+                    <div className="p-3 sm:p-4 space-y-1">
+                      <h5 className="font-extrabold text-slate-900 text-xs sm:text-sm md:text-base group-hover:text-emerald-800 transition-colors line-clamp-1">
+                        {p.name}
+                      </h5>
+
+                      <div className="urdu-font text-emerald-800 font-bold text-xs sm:text-sm truncate leading-tight">
+                        {p.urduName}
+                      </div>
+
+                      <p className="text-slate-500 text-[10px] sm:text-xs line-clamp-2 leading-relaxed">
+                        {p.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom: Price & Button */}
+                  <div className="p-3 sm:p-4 pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-1.5 mt-auto bg-slate-50/50">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block leading-tight">{p.unit}</span>
+                      <span className="text-sm sm:text-base font-black text-slate-900 leading-tight">
+                        Rs. {p.price.toLocaleString()}
                       </span>
                     </div>
 
-                    {/* Fat / Quality Badge Top Right */}
-                    {p.fat && (
-                      <div className="absolute top-2 right-2">
-                        <span className="bg-white/95 text-slate-800 text-[8px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 rounded-md shadow-sm border border-slate-200">
-                          {p.fat}
-                        </span>
-                      </div>
-                    )}
+                    <button
+                      onClick={() => handleAdd(p)}
+                      className={`w-full sm:w-auto px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-black flex items-center justify-center gap-1 transition-all ${
+                        isJustAdded
+                          ? 'bg-emerald-700 text-white'
+                          : 'bg-[#0b1e14] text-white hover:bg-emerald-900'
+                      }`}
+                    >
+                      {isJustAdded ? (
+                        <>
+                          <Check size={12} /> <span>Added</span>
+                        </>
+                      ) : (
+                        <>
+                          <Plus size={12} /> <span>Add</span>
+                        </>
+                      )}
+                    </button>
                   </div>
 
-                  {/* Product Text Details */}
-                  <div className="p-3 sm:p-4 space-y-1 sm:space-y-1.5">
-                    <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm md:text-base group-hover:text-emerald-800 transition-colors leading-snug line-clamp-1">
-                      {p.name}
-                    </h4>
-
-                    <div className="urdu-font text-amber-700 font-bold text-xs sm:text-sm truncate leading-tight">
-                      {p.urduName}
-                    </div>
-
-                    <p className="text-slate-500 text-[10px] sm:text-xs line-clamp-2 leading-relaxed">
-                      {p.description}
-                    </p>
-
-                    <div className="pt-0.5 flex items-center justify-between text-[10px] sm:text-xs text-emerald-800 font-semibold">
-                      <span className="truncate">✓ {p.freshness}</span>
-                    </div>
-                  </div>
                 </div>
-
-                {/* Card Footer: Price & Add to Cart */}
-                <div className="p-3 sm:p-4 pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-1.5 sm:gap-2 mt-auto bg-slate-50/60">
-                  <div>
-                    <span className="text-[10px] sm:text-xs text-slate-400 block leading-tight">{p.unit}</span>
-                    <span className="text-sm sm:text-base md:text-lg font-black text-emerald-950 leading-tight">
-                      Rs. {p.price.toLocaleString()}
-                    </span>
-                  </div>
-
-                  <button
-                    onClick={() => handleAdd(p)}
-                    className={`w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-black flex items-center justify-center gap-1 transition-all shadow-2xs ${
-                      isJustAdded
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-[#063821] text-amber-300 hover:bg-[#031d10] active:scale-95'
-                    }`}
-                  >
-                    {isJustAdded ? (
-                      <>
-                        <Check size={13} /> <span>Added</span>
-                      </>
-                    ) : (
-                      <>
-                        <Plus size={13} /> <span>Add</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Bulk Catering Banner with Royal Wedding Vibe */}
-        <div className="mt-12 sm:mt-16 bg-gradient-to-r from-[#031d10] via-[#063821] to-[#031d10] text-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-amber-500/30 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-          <div className="space-y-1.5 text-center md:text-left z-10">
-            <span className="bg-amber-400/20 text-amber-300 text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-amber-400/30">
-              Special Catering & Wedding Orders
-            </span>
-            <h4 className="text-xl sm:text-2xl lg:text-3xl font-black text-white">
-              Shadi, Khatam & Event Sweet Packs (دیسی گھی سوغاتیں)
-            </h4>
-            <p className="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
-              We provide pure desi ghee halwa gift packaging, authentic matka kheer boxes, and bulk morning buffalo milk delivery across Sahiwal.
-            </p>
+              );
+            })}
           </div>
-
-          <a
-            href="https://wa.me/923002743860?text=Salam!%20Mujhe%20shadi/event%20k%20lye%20bulk%20halwa%20aur%20dairy%20order%20chahiye."
-            target="_blank"
-            rel="noreferrer"
-            className="btn-gold-luxury text-xs sm:text-sm px-6 py-3.5 rounded-2xl whitespace-nowrap shadow-xl z-10 flex items-center gap-2"
-          >
-            <span>Inquire Bulk on WhatsApp</span>
-            <ArrowRight size={15} />
-          </a>
         </div>
 
       </div>

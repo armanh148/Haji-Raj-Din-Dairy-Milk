@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { BranchAnnouncement } from './components/BranchAnnouncement';
+import { AboutFarm } from './components/AboutFarm';
+import { AdvantageCards } from './components/AdvantageCards';
 import { ProductCatalog } from './components/ProductCatalog';
 import { CelebritySpotlight } from './components/CelebritySpotlight';
 import { BranchLocations } from './components/BranchLocations';
 import { OrderCalculator } from './components/OrderCalculator';
 import { PosPitchSection } from './components/PosPitchSection';
+import { NewsletterFarmBanner } from './components/NewsletterFarmBanner';
 import { Footer } from './components/Footer';
 import { CartModal } from './components/CartModal';
 import { Phone, MessageCircle } from 'lucide-react';
@@ -54,25 +56,44 @@ export function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfbf9]">
-      {/* Navigation */}
+    <div className="min-h-screen flex flex-col bg-white">
+      {/* Agrovia Clean Navbar */}
       <Navbar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
       />
 
-      {/* Main Sections */}
+      {/* Main Sections in Exact Agrovia Layout Order */}
       <main className="flex-1">
+        {/* Section 1: Agrovia Style Hero */}
         <Hero />
-        <BranchAnnouncement />
+
+        {/* Section 2: Farm Mission & Circular Green Organic Stamp */}
+        <AboutFarm />
+
+        {/* Section 3: The Raj Din Advantage (4 Minimalist Cards) */}
+        <AdvantageCards />
+
+        {/* Section 4: Fresh Products 3-Column Spotlight + 2-Per-Row Grid */}
         <ProductCatalog onAddToCart={handleAddToCart} />
+
+        {/* Section 5: Client Feedback 3 Cards + Ramzan Jani Video */}
         <CelebritySpotlight />
+
+        {/* Section 6: 3 Sahiwal Branches Detailed Showcase */}
         <BranchLocations />
-        <OrderCalculator cartItems={cartItems} onUpdateCart={setCartItems} />
+
+        {/* Section 7: WhatsApp Basket & Order Assistant */}
+        <OrderCalculator />
+
+        {/* Section 8: Multi-Branch & Desktop POS Pitch Simulator */}
         <PosPitchSection />
+
+        {/* Section 9: Agrovia Newsletter Banner + Panoramic Farm Countryside Photo */}
+        <NewsletterFarmBanner />
       </main>
 
-      {/* Footer */}
+      {/* Agrovia Footer with Giant "HAJI RAJ DIN" Watermark */}
       <Footer />
 
       {/* Cart Drawer Modal */}
@@ -95,15 +116,15 @@ export function App() {
           title="WhatsApp Order: 0300-2743860"
         >
           <MessageCircle size={22} />
-          <span className="hidden sm:inline">Order WhatsApp</span>
+          <span className="hidden sm:inline">WhatsApp Order</span>
         </a>
 
         <a
           href={`tel:${dairyInfo.phoneRaw}`}
-          className="bg-emerald-950 hover:bg-emerald-900 text-white p-3.5 sm:px-4 sm:py-2.5 rounded-full shadow-xl flex items-center gap-2 font-semibold text-xs border border-emerald-700/80 transition-all"
+          className="bg-[#0b1e14] hover:bg-slate-900 text-white p-3.5 sm:px-4 sm:py-2.5 rounded-full shadow-xl flex items-center gap-2 font-semibold text-xs border border-white/20 transition-all"
           title="Call: 0300-2743860"
         >
-          <Phone size={17} className="text-amber-400" />
+          <Phone size={17} className="text-emerald-400" />
           <span className="hidden sm:inline">0300-2743860</span>
         </a>
       </div>
@@ -112,4 +133,3 @@ export function App() {
 }
 
 export default App;
-
