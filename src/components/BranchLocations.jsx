@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { branches, dairyInfo } from '../data/dairyData';
-import { MapPin, Navigation, Phone, MessageCircle, Clock, CheckCircle2, Building2, Sparkles, ArrowRight } from 'lucide-react';
+import { MapPin, Navigation, Phone, MessageCircle, Clock, CheckCircle2, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function BranchLocations() {
   const [selectedBranchId, setSelectedBranchId] = useState(branches[0].id);
+  const [mobileIndex, setMobileIndex] = useState(0);
 
   const selectedBranch = branches.find(b => b.id === selectedBranchId) || branches[0];
+
+  const handlePrevMobile = () => {
+    const nextIdx = (mobileIndex - 1 + branches.length) % branches.length;
+    setMobileIndex(nextIdx);
+    setSelectedBranchId(branches[nextIdx].id);
+  };
+
+  const handleNextMobile = () => {
+    const nextIdx = (mobileIndex + 1) % branches.length;
+    setMobileIndex(nextIdx);
+    setSelectedBranchId(branches[nextIdx].id);
+  };
+
+  const currentMobileBranch = branches[mobileIndex];
 
   return (
     <section id="branches" className="py-16 sm:py-20 bg-[#faf8f2] border-t border-slate-200/80 relative overflow-hidden">
@@ -18,7 +33,7 @@ export function BranchLocations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6 }}
-          className="text-center w-full max-w-5xl mx-auto mb-12"
+          className="text-center w-full max-w-5xl mx-auto mb-10 sm:mb-12"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-300 mb-3 shadow-2xs">
             <Building2 size={14} className="text-emerald-700" />
@@ -38,8 +53,151 @@ export function BranchLocations() {
           </p>
         </motion.div>
 
-        {/* Branch Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+        {/* MOBILE CAROUSEL VIEW (Visible on mobile, hidden on tablet & desktop) */}
+        <div className="block md:hidden mb-8">
+          {/* Mobile Quick Selector Tabs */}
+          <div className="flex items-center gap-1.5 p-1 bg-slate-200/80 rounded-2xl mb-4">
+            {branches.map((b, idx) => {
+              const isActive = idx === mobileIndex;
+              return (
+                <button
+                  key={b.id}
+                  onClick={() => {
+                    setMobileIndex(idx);
+                    setSelectedBranchId(b.id);
+                  }}
+                  className={`flex-1 py-2 px-1 rounded-xl text-center text-xs font-black transition-all ${
+                    isActive
+                      ? 'bg-white text-emerald-950 shadow-sm ring-1 ring-emerald-500/30'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <span className="block truncate text-[11px]">{b.badge}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Carousel Card with AnimatePresence */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentMobileBranch.id}
+                initial={{ opacity: 0, x: 25 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -25 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-amber-400 shadow-xl flex flex-col justify-between"
+              >
+                <div>
+                  {/* Top Status */}
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className={`text-[11px] font-black px-3 py-1 rounded-full ${
+                      currentMobileBranch.isNew 
+                        ? 'btn-gold-luxury text-slate-950 shadow-sm' 
+                        : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    }`}>
+                      {currentMobileBranch.badge}
+                    </span>
+
+                    <span className="text-xs text-emerald-800 font-bold flex items-center gap-1">
+                      <Clock size={12} className="text-emerald-700" /> Open Today
+                    </span>
+                  </div>
+
+                  {/* Branch Title */}
+                  <h4 className="text-lg font-black text-slate-900 mb-0.5">
+                    {currentMobileBranch.name}
+                  </h4>
+                  <p className="urdu-font text-sm text-amber-700 font-bold mb-3">
+                    {currentMobileBranch.urduName}
+                  </p>
+
+                  <p className="text-xs text-slate-600 flex items-start gap-1.5 mb-4 leading-relaxed">
+                    <MapPin size={16} className="text-emerald-700 flex-shrink-0 mt-0.5" />
+                    <span>{currentMobileBranch.address}</span>
+                  </p>
+
+                  {/* Key Features */}
+                  <div className="space-y-2 mb-6 pt-3.5 border-t border-slate-100">
+                    {currentMobileBranch.features.map((feat, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs text-slate-600">
+                        <CheckCircle2 size={14} className="text-emerald-600 flex-shrink-0" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card Action Buttons */}
+                <div className="pt-3.5 border-t border-slate-100 flex items-center gap-2">
+                  <motion.a
+                    whileTap={{ scale: 0.95 }}
+                    href={currentMobileBranch.mapLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <Navigation size={13} className="text-emerald-800" />
+                    <span>Directions</span>
+                  </motion.a>
+
+                  <motion.a
+                    whileTap={{ scale: 0.95 }}
+                    href={`https://wa.me/${dairyInfo.phoneRaw}?text=Assalam-o-Alaikum!%20${encodeURIComponent(currentMobileBranch.name)}%20se%20order%20chahiye.`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 btn-whatsapp-luxury font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5"
+                  >
+                    <MessageCircle size={13} />
+                    <span>WhatsApp</span>
+                  </motion.a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Carousel Navigation Arrows & Dots */}
+            <div className="flex items-center justify-between mt-4 px-1">
+              <motion.button
+                whileTap={{ scale: 0.85 }}
+                onClick={handlePrevMobile}
+                className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200 text-slate-800 flex items-center justify-center active:scale-95 transition-all"
+                aria-label="Previous Branch"
+              >
+                <ChevronLeft size={20} />
+              </motion.button>
+
+              <div className="flex items-center gap-1.5">
+                {branches.map((b, i) => (
+                  <button
+                    key={b.id}
+                    onClick={() => {
+                      setMobileIndex(i);
+                      setSelectedBranchId(b.id);
+                    }}
+                    className={`transition-all rounded-full ${
+                      mobileIndex === i
+                        ? 'w-7 h-2.5 bg-emerald-700'
+                        : 'w-2.5 h-2.5 bg-slate-300'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <motion.button
+                whileTap={{ scale: 0.85 }}
+                onClick={handleNextMobile}
+                className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200 text-slate-800 flex items-center justify-center active:scale-95 transition-all"
+                aria-label="Next Branch"
+              >
+                <ChevronRight size={20} />
+              </motion.button>
+            </div>
+          </div>
+        </div>
+
+        {/* DESKTOP 3-COLUMN GRID VIEW (Hidden on mobile, visible md and up) */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {branches.map((b, idx) => {
             const isSelected = b.id === selectedBranchId;
 
